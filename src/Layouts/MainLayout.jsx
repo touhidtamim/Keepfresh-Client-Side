@@ -13,7 +13,7 @@ const MainLayout = () => {
 
       {navigation.state === "loading" && <Spinner />}
 
-      <div className="md:w-11/12 mx-auto min-h-[90vh]">
+      <div className="bg-[#f9fbfc] min-h-[90vh]">
         <Outlet />
       </div>
 
