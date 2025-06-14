@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const HeroHighlights = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-gradient-to-b from-[#f9fbfc] to-[#eef2f5] min-h-[45vh] text-center overflow-hidden px-4">
+    <div className="flex flex-col items-center justify-center bg-gradient-to-b from-[#f9fbfc] to-[#eef2f5] h-[30vh] lg:min-h-[45vh] text-center overflow-hidden px-4">
       <motion.h1
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

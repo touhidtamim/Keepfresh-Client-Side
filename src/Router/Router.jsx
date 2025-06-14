@@ -7,12 +7,13 @@ import Blog from "../Pages/Blog";
 import Contact from "../Pages/Contact";
 import Register from "./../Pages/Register";
 import LogIn from "./../Pages/LogIn";
+import NotFoundPage from "./../Components/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    errorElement: <h2>error</h2>,
+    errorElement: <NotFoundPage />,
     children: [
       {
         path: "/",

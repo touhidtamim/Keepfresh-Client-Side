@@ -1,15 +1,13 @@
 import React from "react";
 import HeroHighlights from "../Components/HeroHighlights";
-import HeroStory from "../Components/HeroStory";
-import HeroSlider from "../Components/HeroSlider";
+import HeroSlider from "../Components/Slider/HeroSlider";
 
 const Home = () => {
   return (
     <div>
       <HeroHighlights />
-      <HeroStory />
       <HeroSlider />
-      This is Home
+      <div className="text-center text-4xl">This is Home</div>
     </div>
   );
 };

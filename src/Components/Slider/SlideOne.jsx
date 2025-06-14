@@ -10,14 +10,13 @@ const listItemVariants = {
   }),
 };
 
-const HeroStory = () => {
+const SlideOne = () => {
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  // Smooth spring animation for parallax effects
   const yTextRaw = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const yText = useSpring(yTextRaw, { stiffness: 50, damping: 20 });
 
@@ -30,11 +29,12 @@ const HeroStory = () => {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen bg-white py-10 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center md:gap-16"
+      className="min-h-screen pt-14 md:pt-0 bg-white py-10 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center md:gap-16"
       aria-labelledby="hero-story-title"
     >
+      {/* Text Section */}
       <motion.div
-        className="flex-1 max-w-xl"
+        className="flex-1 max-w-xl md:max-w-lg lg:max-w-xl"
         style={{ y: yText, opacity }}
         aria-describedby="hero-story-description"
       >
@@ -44,7 +44,7 @@ const HeroStory = () => {
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-8 text-gray-900"
+          className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900"
         >
           Your kitchen’s{" "}
           <span className="text-sky-600 underline decoration-sky-400 decoration-4 underline-offset-8">
@@ -58,7 +58,7 @@ const HeroStory = () => {
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-lg text-gray-700 mb-10 leading-relaxed"
+          className="text-base sm:text-lg md:text-base lg:text-lg text-gray-700 mb-8 leading-relaxed"
         >
           Food doesn’t speak, but it surely expires. Our app makes sure you’re
           always one step ahead of spoilage. With smart tracking, timely
@@ -70,13 +70,13 @@ const HeroStory = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="space-y-6"
+          className="space-y-5"
           role="list"
         >
           {[
+            "Organize Your Kitchen Like a Pro",
+            "Full Control at Your Fingertips",
             "Smart notifications before items expire",
-            "Easy scanning and manual entry options",
-            "Organize by categories and storage locations",
           ].map((text, i) => (
             <motion.li
               key={i}
@@ -94,7 +94,7 @@ const HeroStory = () => {
                 whileFocus={{ scale: 1.3, rotate: 10, color: "#0284c7" }}
               >
                 <svg
-                  className="w-6 h-6"
+                  className="w-5 h-5 sm:w-6 sm:h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -109,7 +109,7 @@ const HeroStory = () => {
                   />
                 </svg>
               </motion.div>
-              <p className="text-gray-800 font-medium group-hover:text-sky-700 transition-colors duration-300">
+              <p className="text-gray-800 font-medium group-hover:text-sky-700 transition-colors duration-300 text-sm sm:text-base">
                 {text}
               </p>
             </motion.li>
@@ -117,8 +117,9 @@ const HeroStory = () => {
         </motion.ul>
       </motion.div>
 
+      {/* Image Section */}
       <motion.div
-        className="flex-1 max-w-md lg:max-w-lg cursor-pointer"
+        className="flex-1 max-w-md lg:max-w-lg cursor-pointer hidden sm:block"
         style={{ y: yImage, opacity }}
         tabIndex={0}
         aria-label="Organized fridge with food items image"
@@ -147,8 +148,38 @@ const HeroStory = () => {
           />
         </div>
       </motion.div>
+
+      {/* Indicator Arrow  */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+      >
+        <motion.svg
+          animate={{ y: [0, 10, 0] }}
+          transition={{
+            repeat: Infinity,
+            duration: 1.5,
+            ease: "easeInOut",
+          }}
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7 10L12 15L17 10"
+            stroke="#4f46e5"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </motion.svg>
+      </motion.div>
     </section>
   );
 };
 
-export default HeroStory;
+export default SlideOne;
