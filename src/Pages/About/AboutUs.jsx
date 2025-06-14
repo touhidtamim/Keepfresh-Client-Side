@@ -1,7 +1,17 @@
-import React from "react";
+import JoinMovement from "./JoinMovement";
+import MissionStatement from "./MissionStatement";
+import OurStory from "./OurStory";
+import TeamPrinciples from "./TeamPrinciples";
 
-const AboutUs = () => {
-  return <div>AboutUs</div>;
+const AboutPage = () => {
+  return (
+    <div>
+      <MissionStatement />
+      <OurStory />
+      <TeamPrinciples />
+      <JoinMovement />
+    </div>
+  );
 };
 
-export default AboutUs;
+export default AboutPage;
