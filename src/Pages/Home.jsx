@@ -1,6 +1,7 @@
 import React from "react";
-import HeroHighlights from "../Components/HeroHighlights";
+import HeroHighlights from "../Components/Banner/HeroHighlights";
 import HeroSlider from "../Components/Slider/HeroSlider";
+import HowItWorks from "../Components/HowItWorks/HowItWorks";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <HeroHighlights />
       <HeroSlider />
       <div className="text-center text-4xl">This is Home</div>
+      <HowItWorks />
     </div>
   );
 };
