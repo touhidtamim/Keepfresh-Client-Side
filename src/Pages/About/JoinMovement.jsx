@@ -6,7 +6,7 @@ const JoinMovement = () => {
     <motion.section
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.6 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
       viewport={{ once: true, margin: "-100px" }}
       className="py-16 px-4 sm:px-6 lg:px-8 bg-white"
     >
@@ -21,7 +21,7 @@ const JoinMovement = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="px-8 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg shadow-md transition-colors duration-300"
+          className=" cursor-pointer px-8 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg shadow-md transition-colors duration-300"
         >
           Start Saving Food Today
         </motion.button>

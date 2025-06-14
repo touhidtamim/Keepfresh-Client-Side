@@ -4,7 +4,7 @@ import Home from "../Pages/Home";
 import Fridge from "../Pages/Fridge";
 import AboutUs from "../Pages/About/AboutUs";
 import Blog from "../Pages/Blog";
-import Contact from "../Pages/Contact";
+import Contact from "../Pages/Contact/Contact";
 import Register from "./../Pages/Register";
 import LogIn from "./../Pages/LogIn";
 import NotFoundPage from "./../Components/NotFound";

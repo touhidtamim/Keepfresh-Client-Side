@@ -16,9 +16,10 @@ const OurStory = () => {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
             <p className="text-gray-600 mb-4">
-              FoodSave began in 2025 when our founder noticed how much perfectly
-              good food was being thrown away in his own home simply because it
-              got forgotten in the fridge.
+              <span className="font-semibold text-sky-600">KeepFresh</span>{" "}
+              began in 2025 when our founder noticed how much perfectly good
+              food was being thrown away in his own home simply because it got
+              forgotten in the fridge.
             </p>
             <p className="text-gray-600 mb-4">
               What started as a simple spreadsheet to track expiration dates

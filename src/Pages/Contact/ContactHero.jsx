@@ -2,7 +2,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
-const MissionStatement = () => {
+const ContactHero = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: true, rootMargin: "-100px" });
 
@@ -21,16 +21,13 @@ const MissionStatement = () => {
         transition={{ duration: 0.6 }}
         className="max-w-4xl mx-auto text-center"
       >
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6">
-          Our <span className="text-sky-600">Mission</span>
-        </h2>
-        <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-          We built <span className="font-semibold text-sky-600">KeepFresh</span>{" "}
-          because we believe every bite counts. After seeing our own
-          refrigerators waste food while others go hungry, we created a solution
-          that helps households reduce food waste effortlessly. Our mission is
-          to make sustainable food management accessible to everyone, one
-          kitchen at a time.
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+          We'd <span className="text-sky-600">Love to Hear</span> From You
+        </h1>
+        <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+          Have questions about{" "}
+          <span className="font-semibold text-sky-600">KeepFresh</span>? Want to
+          share your success story? Our team is here to help.
         </p>
         <div className="w-24 h-1 bg-sky-400 mx-auto rounded-full"></div>
       </motion.div>
@@ -38,4 +35,4 @@ const MissionStatement = () => {
   );
 };
 
-export default MissionStatement;
+export default ContactHero;

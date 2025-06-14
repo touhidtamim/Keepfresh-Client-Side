@@ -22,7 +22,7 @@ const TeamPrinciples = () => {
     <motion.section
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.6, delay: 0.4 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
       viewport={{ once: true, margin: "-100px" }}
       className="py-16 px-4 sm:px-6 lg:px-8 bg-sky-50"
     >
