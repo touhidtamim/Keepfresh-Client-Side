@@ -5,9 +5,11 @@ import Fridge from "../Pages/Fridge";
 import AboutUs from "../Pages/About/AboutUs";
 import Blog from "../Pages/Blog";
 import Contact from "../Pages/Contact/Contact";
-import Register from "./../Pages/Register";
-import LogIn from "./../Pages/LogIn";
+import Register from "../Pages/Authentication/Register";
+import LogIn from "../Pages/Authentication/LogIn";
 import NotFoundPage from "./../Components/NotFound";
+import PrivacyPolicy from "../Components/Banner/PrivacyPolicy";
+import TermsAndConditions from "../Components/TermsAndConditions";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +50,16 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LogIn />,
+      },
+
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+
+      {
+        path: "/terms&condition",
+        element: <TermsAndConditions />,
       },
     ],
   },
