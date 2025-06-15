@@ -8,7 +8,7 @@ import Contact from "../Pages/Contact/Contact";
 import Register from "../Pages/Authentication/Register";
 import LogIn from "../Pages/Authentication/LogIn";
 import NotFoundPage from "./../Components/NotFound";
-import PrivacyPolicy from "../Components/Banner/PrivacyPolicy";
+import PrivacyPolicy from "../Components/PrivacyPolicy";
 import TermsAndConditions from "../Components/TermsAndConditions";
 
 const router = createBrowserRouter([
