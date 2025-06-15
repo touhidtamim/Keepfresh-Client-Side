@@ -2,9 +2,11 @@ import Spinner from "../Components/Spinner";
 import Navbar from "../Components/Navbar";
 import ScrollToTop from "./../Components/ScrollToTop";
 import Footer from "../Components/Footer";
-import { Outlet } from "react-router";
+import { Outlet, useNavigation } from "react-router";
 
 const MainLayout = () => {
+  const navigation = useNavigation();
+
   return (
     <>
       <Navbar></Navbar>

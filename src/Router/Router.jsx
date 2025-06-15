@@ -7,9 +7,14 @@ import Blog from "../Pages/Blog";
 import Contact from "../Pages/Contact/Contact";
 import Register from "../Pages/Authentication/Register";
 import LogIn from "../Pages/Authentication/LogIn";
+import ForgetPassword from "../Pages/Authentication/ForgetPassword";
 import NotFoundPage from "./../Components/NotFound";
 import PrivacyPolicy from "../Components/PrivacyPolicy";
 import TermsAndConditions from "../Components/TermsAndConditions";
+import AddFood from "../Pages/AddFood/AddFood";
+import MyItems from "../Pages/MyItems/MyItems";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import Notification from "../Pages/Notification";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +30,26 @@ const router = createBrowserRouter([
       {
         path: "/fridge",
         element: <Fridge />,
+      },
+
+      {
+        path: "/add-food",
+        element: <AddFood />,
+      },
+
+      {
+        path: "/my-items",
+        element: <MyItems />,
+      },
+
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+
+      {
+        path: "/notifications",
+        element: <Notification />,
       },
 
       {
@@ -50,6 +75,11 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LogIn />,
+      },
+
+      {
+        path: "/forgot-password",
+        element: <ForgetPassword />,
       },
 
       {
