@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home";
-import Fridge from "../Pages/Fridge";
+import Fridge from "../Pages/Fridge/Fridge";
 import AboutUs from "../Pages/About/AboutUs";
 import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
@@ -15,7 +15,7 @@ import TermsAndConditions from "../Components/TermsAndConditions";
 import AddFood from "../Pages/AddFood/AddFood";
 import MyItems from "../Pages/MyItems/MyItems";
 import Dashboard from "../Pages/Dashboard/Dashboard";
-import Notification from "../Pages/Notification";
+import Notification from "../Pages/Notification/Notification";
 
 const router = createBrowserRouter([
   {

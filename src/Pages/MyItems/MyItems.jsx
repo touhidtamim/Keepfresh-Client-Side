@@ -1,7 +1,12 @@
 import React from "react";
+import MyItemsIntro from "./MyItemsIntro";
 
 const MyItems = () => {
-  return <div className="text-5xl">My Item</div>;
+  return (
+    <>
+      <MyItemsIntro />
+    </>
+  );
 };
 
 export default MyItems;

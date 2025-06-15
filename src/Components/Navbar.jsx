@@ -112,7 +112,7 @@ const Navbar = () => {
               <>
                 {/* Notification Button */}
                 <button
-                  className="p-2 rounded-full hover:bg-sky-100 transition"
+                  className="p-2 cursor-pointer rounded-full hover:bg-sky-100 transition"
                   onClick={() => navigate("/notifications")}
                   title="Notifications"
                 >
@@ -136,7 +136,7 @@ const Navbar = () => {
                 {/* Logout */}
                 <button
                   onClick={handleLogout}
-                  className=" hidden lg:flex items-center gap-1 px-3 py-2 rounded-md text-md text-red-600 hover:bg-red-50"
+                  className=" hidden cursor-pointer lg:flex items-center gap-1 px-3 py-2 rounded-md text-md text-red-600 hover:bg-red-100"
                 >
                   <FiLogOut />
                   Logout

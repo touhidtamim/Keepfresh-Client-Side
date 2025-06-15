@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Swal from "sweetalert2";
 
+//  Health Guidelines
 const GUIDELINES = {
   Underweight: {
     description: "Your BMI suggests you're underweight...",
@@ -44,17 +44,22 @@ const GUIDELINES = {
   },
 };
 
+//  Modal Component
 const GuidelinesModal = ({ status, onClose }) => {
   if (!status) return null;
   const { description, recommendations, tip } = GUIDELINES[status];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-      <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-xl relative max-h-[80vh] overflow-y-auto">
+      <div
+        role="dialog"
+        aria-modal="true"
+        className="bg-white rounded-2xl p-6 max-w-md w-full shadow-xl relative max-h-[80vh] overflow-y-auto"
+      >
         <button
           onClick={onClose}
           aria-label="Close Modal"
-          className="absolute top-4 right-4 text-3xl text-gray-500 hover:text-gray-700 cursor-pointer"
+          className="absolute top-4 right-4 text-3xl text-gray-500 hover:text-gray-700"
         >
           &times;
         </button>
@@ -76,7 +81,7 @@ const GuidelinesModal = ({ status, onClose }) => {
         </ul>
         <button
           onClick={onClose}
-          className="w-full bg-sky-700 hover:bg-sky-800 text-white py-2 rounded-full font-semibold cursor-pointer"
+          className="w-full bg-sky-700 hover:bg-sky-800 text-white py-2 rounded-full font-semibold"
         >
           Got It - Let's Get Healthier!
         </button>
@@ -85,6 +90,7 @@ const GuidelinesModal = ({ status, onClose }) => {
   );
 };
 
+//  Main Component
 const BMICalculator = () => {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
@@ -96,11 +102,7 @@ const BMICalculator = () => {
 
   const calculateBMI = () => {
     if (!height || !weight || !age || !gender) {
-      Swal.fire({
-        icon: "warning",
-        title: "Incomplete Details",
-        text: "Please complete all fields before calculating.",
-      });
+      alert("Please complete all fields.");
       return;
     }
 
@@ -131,9 +133,10 @@ const BMICalculator = () => {
   };
 
   return (
-    <div className="py-5 md:py-8 lg:py-20 bg-gradient-to-br from-sky-50 via-white to-indigo-50 flex items-center justify-center p-4">
+    <div className=" py-5 md:py-8 lg:py-20  bg-gradient-to-br from-sky-50 via-white to-indigo-50 flex items-center justify-center p-4">
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg overflow-hidden">
         <div className="md:flex">
+          {/*  Left Section: Inputs */}
           <div className="p-6 md:p-8 md:w-1/2 flex flex-col">
             <h2 className="text-2xl md:text-3xl font-extrabold mb-4">
               Smart BMI Calculator
@@ -183,19 +186,20 @@ const BMICalculator = () => {
             <div className="flex space-x-3 mt-auto">
               <button
                 onClick={calculateBMI}
-                className="flex-1 bg-sky-600 hover:bg-sky-700 text-white py-2 rounded-lg font-semibold cursor-pointer"
+                className="flex-1 bg-sky-600 hover:bg-sky-700 text-white py-2 rounded-lg font-semibold"
               >
                 Calculate BMI
               </button>
               <button
                 onClick={reset}
-                className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-lg font-semibold cursor-pointer"
+                className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-lg font-semibold"
               >
                 Reset
               </button>
             </div>
           </div>
 
+          {/*  Right Section: Results */}
           <div className="bg-gradient-to-r from-sky-100 to-indigo-100 p-6 md:p-8 md:w-1/2 flex flex-col">
             {bmi ? (
               <>
@@ -248,11 +252,11 @@ const BMICalculator = () => {
                 <div className="flex space-x-3 mt-auto pt-4">
                   <button
                     onClick={() => setShowModal(true)}
-                    className="flex-1 bg-sky-700 hover:bg-sky-800 text-white py-2 rounded-full font-semibold text-sm cursor-pointer"
+                    className="flex-1 bg-sky-700 hover:bg-sky-800 text-white py-2 rounded-full font-semibold text-sm"
                   >
                     View Guidelines
                   </button>
-                  <button className="flex-1 border-2 border-sky-700 text-sky-700 hover:bg-sky-50 py-2 rounded-full font-semibold text-sm cursor-pointer">
+                  <button className="flex-1 border-2 border-sky-700 text-sky-700 hover:bg-sky-50 py-2 rounded-full font-semibold text-sm">
                     Track Progress
                   </button>
                 </div>
@@ -280,6 +284,7 @@ const BMICalculator = () => {
         </div>
       </div>
 
+      {/*  Modal */}
       {showModal && (
         <GuidelinesModal status={status} onClose={() => setShowModal(false)} />
       )}

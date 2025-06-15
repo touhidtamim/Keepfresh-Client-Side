@@ -1,7 +1,12 @@
 import React from "react";
+import AddFoodIntro from "./AddFoodIntro";
 
 const AddFood = () => {
-  return <div className="text-5xl">AddFood</div>;
+  return (
+    <>
+      <AddFoodIntro />
+    </>
+  );
 };
 
 export default AddFood;

@@ -137,7 +137,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="text-center text-sm text-gray-500 pb-5  bg-black/50 dark:bg-gray-900/50 dark:border-gray-700">
+      <div className="text-center text-sm text-gray-500 pb-5  bg-black/50  ">
         &copy; {new Date().getFullYear()} KeepFresh. All rights reserved.
       </div>
     </footer>
