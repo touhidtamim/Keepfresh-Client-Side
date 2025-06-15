@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { Link } from "react-router";
 
 const SlideThree = () => {
   const sectionRef = useRef(null);
@@ -90,13 +91,15 @@ const SlideThree = () => {
           ))}
         </motion.ul>
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 md:py-3 text-md md:text-lg font-medium rounded-lg shadow-md transition"
-        >
-          Try Dashboard Demo
-        </motion.button>
+        <Link to="/dashboard">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-teal-600 cursor-pointer hover:bg-teal-700 text-white px-6 py-2 md:py-3 text-md md:text-lg font-medium rounded-lg shadow-md transition"
+          >
+            Try Dashboard Demo
+          </motion.button>
+        </Link>
       </motion.div>
 
       {/* Right Content - HIDDEN on mobile */}

@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { Link } from "react-router";
 
 const SlideFour = () => {
   const ref = useRef(null);
@@ -48,9 +49,12 @@ const SlideFour = () => {
           viewport={{ once: true }}
           className="flex justify-center"
         >
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 sm:px-7 py-2 md:py-3 text-base sm:text-lg font-medium rounded-lg shadow transition">
+          <Link
+            to="/add-food"
+            className="bg-indigo-600 hover:bg-indigo-700 cursor-pointer text-white px-6 sm:px-7 py-2 md:py-3 text-base sm:text-lg font-medium rounded-lg shadow transition"
+          >
             Get Started Now
-          </button>
+          </Link>
         </motion.div>
       </motion.div>
 

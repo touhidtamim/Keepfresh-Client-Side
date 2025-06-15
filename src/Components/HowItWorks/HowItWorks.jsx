@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 
 const HowItWorks = () => {
   const steps = [
@@ -123,9 +124,12 @@ const HowItWorks = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="mt-16 text-center"
         >
-          <button className="px-8 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg shadow-md transition-colors duration-300 transform hover:scale-105">
+          <Link
+            to="/add-food"
+            className="px-8 py-3 cursor-pointer bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg shadow-md transition-colors duration-300 transform hover:scale-105"
+          >
             Start Tracking Now
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

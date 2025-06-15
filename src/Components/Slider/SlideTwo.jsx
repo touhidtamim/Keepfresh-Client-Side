@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { Link } from "react-router";
 
 const SlideTwo = () => {
   const sectionRef = useRef(null);
@@ -86,23 +87,25 @@ const SlideTwo = () => {
         </motion.ul>
 
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2 md:py-2.5 text-md md:text-lg font-medium rounded-lg shadow-md w-full sm:w-auto"
-            onClick={() => (window.location.href = "/signup")}
-          >
-            Stop the Waste Now
-          </motion.button>
+          <Link to="/my-items">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-rose-600 cursor-pointer hover:bg-rose-700 text-white px-6 py-2 md:py-2.5 text-md md:text-lg font-medium rounded-lg shadow-md w-full sm:w-auto"
+            >
+              Stop the Waste Now
+            </motion.button>
+          </Link>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-2 md:py-2.5 text-md md:text-lg font-medium rounded-lg shadow-sm w-full sm:w-auto"
-            onClick={() => (window.location.href = "/impact")}
-          >
-            See the Impact
-          </motion.button>
+          <Link to="/dashboard">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white cursor-pointer border border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-2 md:py-2.5 text-md md:text-lg font-medium rounded-lg shadow-sm w-full sm:w-auto"
+            >
+              See the Impact
+            </motion.button>
+          </Link>
         </div>
       </motion.div>
 

@@ -1,9 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 const HeroHighlights = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-gradient-to-b from-[#f9fbfc] to-[#eef2f5] h-[30vh] lg:min-h-[45vh] text-center overflow-hidden px-4">
+    <div className="relative flex flex-col items-center justify-center bg-gradient-to-b from-[#f9fbfc] to-[#eef2f5] h-[30vh] lg:min-h-[45vh] text-center overflow-hidden px-4">
       <motion.h1
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -22,6 +23,16 @@ const HeroHighlights = () => {
         But <span className="text-sky-700">we’ll alert you</span> before it
         enters.
       </motion.p>
+
+      {/* Scroll Icon */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2"
+      >
+        <ChevronDown className="animate-bounce w-6 h-6 text-gray-500 opacity-70" />
+      </motion.div>
     </div>
   );
 };

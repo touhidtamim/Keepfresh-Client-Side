@@ -3,13 +3,14 @@ import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home";
 import Fridge from "../Pages/Fridge";
 import AboutUs from "../Pages/About/AboutUs";
-import Blog from "../Pages/Blog";
+import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
 import Register from "../Pages/Authentication/Register";
 import LogIn from "../Pages/Authentication/LogIn";
 import ForgetPassword from "../Pages/Authentication/ForgetPassword";
 import NotFoundPage from "./../Components/NotFound";
 import PrivacyPolicy from "../Components/PrivacyPolicy";
+import FAQ from "../Components/FAQ";
 import TermsAndConditions from "../Components/TermsAndConditions";
 import AddFood from "../Pages/AddFood/AddFood";
 import MyItems from "../Pages/MyItems/MyItems";
@@ -80,6 +81,11 @@ const router = createBrowserRouter([
       {
         path: "/forgot-password",
         element: <ForgetPassword />,
+      },
+
+      {
+        path: "/faq",
+        element: <FAQ />,
       },
 
       {

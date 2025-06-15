@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "heading": "Understanding the Environmental Impact of Food Waste",
+    "description": "Food waste is not just a personal loss but a global environmental crisis. When food is thrown away, all the resources used to produce it such as water, energy, and labor are wasted as well. Moreover, decomposing food in landfills releases methane, a greenhouse gas far more potent than carbon dioxide. Reducing food waste can significantly decrease your carbon footprint and help combat climate change.",
+    "image": "https://i.postimg.cc/1R6s0hbG/dd6c9d23-82e8-42e7-a705-f4b97f793186.webp",
+    "tips": [
+      "Plan your meals and buy only what you need.",
+      "Compost food scraps instead of sending them to landfill.",
+      "Donate excess food to local charities."
+    ]
+  },
+  {
+    "id": 2,
+    "heading": "How Meal Planning Can Help Reduce Food Waste",
+    "description": "Meal planning is one of the most effective ways to reduce food waste at home. By planning your weekly meals, you can buy exactly what you need, avoid impulse purchases, and use leftovers effectively. It also saves money and time by preventing multiple trips to the grocery store and reducing last-minute takeout orders.",
+    "image": "https://i.postimg.cc/zX8ZnLCN/Article-Images-Food-Waste-At-Home.png",
+    "tips": [
+      "Make a shopping list based on your meal plan.",
+      "Prep ingredients in advance to save cooking time.",
+      "Use apps or journals to track what food you have."
+    ]
+  },
+  {
+    "id": 3,
+    "heading": "Proper Storage Techniques for Fruits and Vegetables",
+    "description": "Storing fruits and vegetables correctly can extend their freshness and reduce spoilage. Some produce like apples and bananas emit ethylene gas that can cause nearby vegetables to ripen and spoil faster. Keep your fridge organized, use breathable bags for veggies, and store leafy greens wrapped in damp paper towels to keep them fresh longer.",
+    "image": "https://i.postimg.cc/FsDq3TFb/Snippit-EN.jpg",
+    "tips": [
+      "Separate ethylene-producing fruits from vegetables.",
+      "Keep your fridge temperature between 1-4°C.",
+      "Use airtight containers for cut fruits and veggies."
+    ]
+  },
+  {
+    "id": 4,
+    "heading": "Creative Ways to Use Leftovers",
+    "description": "Leftovers don’t have to be boring or wasted. With a little creativity, you can transform them into delicious new meals. For example, leftover roasted vegetables can be blended into soups, or stale bread can become homemade croutons. This not only reduces waste but also adds variety to your diet.",
+    "image": "https://i.postimg.cc/QCj4WTRn/being-creative-with-leftovers.png",
+    "tips": [
+      "Freeze leftovers in portion-sized containers.",
+      "Incorporate leftovers into salads or wraps.",
+      "Turn stale bread into breadcrumbs or croutons."
+    ]
+  },
+  {
+    "id": 5,
+    "heading": "Understanding Food Expiry Dates",
+    "description": "Many people throw away food based on the expiration date without understanding what it really means. 'Best before' indicates quality, not safety, while 'use by' indicates when food is unsafe to consume. Learning to interpret these labels can help reduce unnecessary waste. Always use your senses to judge food freshness.",
+    "image": "https://i.postimg.cc/2SnZgKqh/15798.jpg",
+    "tips": [
+      "Check 'best before' dates but don’t discard food automatically.",
+      "Trust your smell and sight to assess food quality.",
+      "Store food properly to extend shelf life."
+    ]
+  },
+  {
+    "id": 6,
+    "heading": "Smart Shopping Habits to Minimize Waste",
+    "description": "Smart shopping can prevent excess food from being purchased and wasted. Avoid shopping when hungry to reduce impulse buys, buy loose fruits and vegetables instead of pre-packaged, and consider portion sizes carefully. Also, shopping at local markets can give you fresher options and help reduce packaging waste.",
+    "image": "https://i.postimg.cc/FzffpW5f/The-Ultimate-Guide-to-Meal-Planning-and-Grocery-Shopping-for-Busy-People-1.png",
+    "tips": [
+      "Always make and stick to a grocery list.",
+      "Buy seasonal produce for better quality and price.",
+      "Avoid bulk purchases of perishable items."
+    ]
+  },
+  {
+    "id": 7,
+    "heading": "How Technology Can Help Track Food Waste",
+    "description": "There are many apps and smart devices designed to help you track your food inventory and waste. These tools remind you about expiry dates, suggest recipes based on leftover ingredients, and even analyze your waste patterns to help you improve. Using technology can make reducing food waste easier and more efficient.",
+    "image": "https://i.postimg.cc/QMtWVx4k/tracking-food-waste.jpg",
+    "tips": [
+      "Use a food waste tracker app daily.",
+      "Set reminders for expiring foods.",
+      "Analyze monthly waste reports to identify patterns."
+    ]
+  },
+  {
+    "id": 8,
+    "heading": "Benefits of Composting Food Waste",
+    "description": "Composting turns organic food waste into nutrient-rich soil, reducing the amount of waste sent to landfills and cutting down methane emissions. It also supports plant growth by enriching soil health. Starting a compost bin at home is simple and can be done even in small spaces.",
+    "image": "https://i.postimg.cc/wjW1KYqt/benefits-of-applying-compost-march-21-final.jpg",
+    "tips": [
+      "Start with a small compost bin or pile.",
+      "Add vegetable scraps, coffee grounds, and eggshells.",
+      "Avoid composting meat, dairy, and oily foods."
+    ]
+  },
+  {
+    "id": 9,
+    "heading": "Portion Control: Eating the Right Amount",
+    "description": "Over-serving food often leads to uneaten leftovers that get wasted. Practicing portion control ensures you serve only what you can eat, minimizing waste and helping with healthier eating habits. Using smaller plates and measuring portions can help you get used to the right serving sizes.",
+    "image": "https://i.postimg.cc/4xnJ97Gd/Portion-Sizes-en0d599d43e23433ab1c2aa653f140a7e5.jpg",
+    "tips": [
+      "Use smaller plates to reduce serving sizes.",
+      "Serve food in courses to avoid waste.",
+      "Save uneaten portions for later meals."
+    ]
+  },
+  {
+    "id": 10,
+    "heading": "How to Repurpose Food Scraps",
+    "description": "Many food scraps can be repurposed rather than discarded. Vegetable peels can be used to make broth, citrus peels can be used for natural cleaning, and coffee grounds make great fertilizers. Learning how to reuse scraps reduces waste and maximizes the value of your food.",
+    "image": "https://i.postimg.cc/CL3vj9Tq/287954000-437597151534984-1159169804697568885-n-jpg.webp",
+    "tips": [
+      "Make homemade vegetable broth from peels.",
+      "Use citrus peels to freshen your garbage disposal.",
+      "Add coffee grounds to your garden as fertilizer."
+    ]
+  },
+  {
+    "id": 11,
+    "heading": "Freezing Food Correctly to Avoid Waste",
+    "description": "Freezing is a great way to preserve food for longer periods, but it requires correct techniques. Use airtight containers or freezer bags, portion food into usable amounts, and label everything with dates. This helps prevent freezer burn and keeps food safe and tasty for longer.",
+    "image": "https://i.postimg.cc/DfqQ90t8/Freezer-organization-chart.png",
+    "tips": [
+      "Freeze food in small portions for easy thawing.",
+      "Label containers with dates.",
+      "Avoid freezing food twice."
+    ]
+  },
+  {
+    "id": 12,
+    "heading": "Educating Your Family on Food Waste Reduction",
+    "description": "Food waste reduction is more effective when the whole family is involved. Teaching children the value of food and involving them in meal planning and cooking encourages better habits. Making it a fun family activity can create lasting changes and a culture of sustainability at home.",
+    "image": "https://i.postimg.cc/ryJ0GrBC/05-00-Food-Families-Newsletter-Nutrition-Health-Family.jpg",
+    "tips": [
+      "Discuss food waste issues with your family.",
+      "Involve kids in meal planning and cooking.",
+      "Set weekly challenges to minimize waste."
+    ]
+  },
+  {
+    "id": 13,
+    "heading": "Seasonal Eating and Its Impact on Waste Reduction",
+    "description": "Eating foods that are in season locally not only tastes better but reduces waste caused by long-distance transportation and storage. Seasonal produce is fresher, often less expensive, and supports local farmers. Adjust your meal plans according to the seasons to maximize benefits.",
+    "image": "https://i.postimg.cc/wx0MRdNw/0712-Seasonal-Eating-SC.jpg",
+    "tips": [
+      "Buy local fruits and vegetables when in season.",
+      "Preserve seasonal produce by freezing or canning.",
+      "Try seasonal recipes to vary your diet."
+    ]
+  },
+  {
+    "id": 14,
+    "heading": "Reducing Food Waste While Dining Out",
+    "description": "Reducing waste isn’t only for home—being mindful when eating out can also make a difference. Ordering appropriate portion sizes, asking for to-go boxes, and sharing dishes with friends can minimize waste. Many restaurants are also adopting practices to reduce their own food waste.",
+    "image": "https://i.postimg.cc/TYKdy5fP/6-Ways-to-Reduce-Waste-While-Eating-Out-1-683x1024.webp",
+    "tips": [
+      "Order smaller portions or share meals.",
+      "Ask for leftovers to take home.",
+      "Avoid ordering extra sides you won’t finish."
+    ]
+  },
+  {
+    "id": 15,
+    "heading": "Starting a Zero Waste Kitchen",
+    "description": "A zero waste kitchen aims to minimize packaging and food waste by using reusable containers, buying in bulk, and composting scraps. This lifestyle change not only reduces environmental impact but also promotes mindful consumption. Starting small with simple changes can lead to big results over time.",
+    "image": "https://i.postimg.cc/g0sFtGm5/73325395.jpg",
+    "tips": [
+      "Use reusable produce bags and containers.",
+      "Buy unpackaged bulk foods when possible.",
+      "Compost organic waste regularly."
+    ]
+  }
+]
