@@ -16,6 +16,7 @@ import AddFood from "../Pages/AddFood/AddFood";
 import MyItems from "../Pages/MyItems/MyItems";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Notification from "../Pages/Notification/Notification";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -35,22 +36,38 @@ const router = createBrowserRouter([
 
       {
         path: "/add-food",
-        element: <AddFood />,
+        element: (
+          <PrivateRouter>
+            <AddFood />
+          </PrivateRouter>
+        ),
       },
 
       {
         path: "/my-items",
-        element: <MyItems />,
+        element: (
+          <PrivateRouter>
+            <MyItems />
+          </PrivateRouter>
+        ),
       },
 
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <PrivateRouter>
+            <Dashboard />
+          </PrivateRouter>
+        ),
       },
 
       {
         path: "/notifications",
-        element: <Notification />,
+        element: (
+          <PrivateRouter>
+            <Notification />
+          </PrivateRouter>
+        ),
       },
 
       {
