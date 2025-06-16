@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 //  Health Guidelines
 const GUIDELINES = {
@@ -102,7 +103,7 @@ const BMICalculator = () => {
 
   const calculateBMI = () => {
     if (!height || !weight || !age || !gender) {
-      alert("Please complete all fields.");
+      toast.error("Please complete all fields.");
       return;
     }
 

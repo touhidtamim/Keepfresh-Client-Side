@@ -18,13 +18,15 @@ const JoinMovement = () => {
           Together, we're creating a community of conscious consumers who
           believe small daily actions can lead to big environmental change.
         </p>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className=" cursor-pointer px-8 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg shadow-md transition-colors duration-300"
-        >
-          Start Saving Food Today
-        </motion.button>
+        <Link to="/add-food">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className=" cursor-pointer px-8 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg shadow-md transition-colors duration-300"
+          >
+            Start Saving Food Today
+          </motion.button>
+        </Link>
         <p className="text-sm text-gray-500 mt-4">
           Already part of our community?{" "}
           <Link to="/blog" className="text-sky-600 hover:underline">

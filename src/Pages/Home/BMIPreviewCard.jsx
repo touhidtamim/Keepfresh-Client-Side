@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaHeartbeat } from "react-icons/fa";
+import { HashLink } from "react-router-hash-link";
 
 const BMIPreviewCard = () => {
   const navigate = useNavigate();
@@ -53,12 +54,12 @@ const BMIPreviewCard = () => {
               health ally — not an enemy.
             </p>
 
-            <Link
-              to="/dashboard"
+            <HashLink
+              to="/dashboard#bmi"
               className="cursor-pointer px-7 py-3 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-full shadow-md transition-transform duration-300 transform hover:scale-105"
             >
               Calculate My BMI
-            </Link>
+            </HashLink>
 
             <p className="text-sm text-gray-400 italic">
               A small step today can lead to a healthier you tomorrow 🌱

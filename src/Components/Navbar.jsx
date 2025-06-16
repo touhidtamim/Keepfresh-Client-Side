@@ -3,6 +3,7 @@ import { FiMenu, FiX, FiBell, FiLogOut } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { HashLink } from "react-router-hash-link";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -121,13 +122,14 @@ const Navbar = () => {
 
                 {/* Avatar with hover tooltip and click to dashboard */}
                 <div className="relative group cursor-pointer">
-                  <img
-                    src={user.photoURL || defaultAvatar}
-                    alt="User"
-                    onClick={() => navigate("/dashboard")}
-                    title={user.displayName || "User"}
-                    className="h-9 w-9 rounded-full border border-gray-300 hover:ring-2 ring-sky-300"
-                  />
+                  <HashLink to="/dashboard#profile" smooth>
+                    <img
+                      src={user.photoURL || defaultAvatar}
+                      alt="User"
+                      title={user.displayName || "User"}
+                      className="h-9 w-9 rounded-full border border-gray-300 hover:ring-2 ring-sky-300 cursor-pointer"
+                    />
+                  </HashLink>
                   <div className="absolute hidden group-hover:block bg-black text-white text-xs rounded px-2 py-1 top-full mt-1 right-0 z-50 whitespace-nowrap">
                     {user.displayName || "User"}
                   </div>

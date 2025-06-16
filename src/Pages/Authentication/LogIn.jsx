@@ -15,6 +15,8 @@ const MySwal = withReactContent(Swal);
 const LogIn = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const auth = getAuth();
@@ -28,12 +30,12 @@ const LogIn = () => {
     }));
   };
 
-  // Clear form fields helper
+  // Clear form
   const clearForm = () => {
     setFormData({ email: "", password: "" });
   };
 
-  // Show error alert helper
+  // Show error
   const showErrorAlert = (message) => {
     MySwal.fire({
       icon: "error",
@@ -43,7 +45,7 @@ const LogIn = () => {
     });
   };
 
-  // Show success alert helper
+  // Show success
   const showSuccessAlert = (message) => {
     return MySwal.fire({
       icon: "success",
@@ -57,12 +59,10 @@ const LogIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (isLoading) return; // prevent multiple submits
-
+    if (isLoading) return;
     setIsLoading(true);
 
     try {
-      // Basic validation before request
       if (!formData.email.trim() || !formData.password.trim()) {
         showErrorAlert("Please enter both email and password.");
         setIsLoading(false);
@@ -75,9 +75,8 @@ const LogIn = () => {
 
       clearForm();
 
-      navigate("/"); // redirect to homepage or dashboard
+      navigate("/");
     } catch (error) {
-      // More user-friendly error messages
       let message = "Something went wrong, please try again.";
 
       if (error.code === "auth/user-not-found") {
@@ -100,7 +99,7 @@ const LogIn = () => {
   };
 
   const handleGoogleLogin = async () => {
-    if (isLoading) return; // prevent multiple clicks
+    if (isLoading) return;
 
     setIsLoading(true);
 
@@ -113,7 +112,6 @@ const LogIn = () => {
 
       navigate("/");
     } catch (error) {
-      // Handle google login errors nicely
       let message = "Google login failed. Please try again.";
 
       if (error.code === "auth/popup-closed-by-user") {
@@ -178,17 +176,59 @@ const LogIn = () => {
               >
                 Password
               </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="off"
-                required
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-sky-500 focus:border-sky-500"
-                disabled={isLoading}
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="off"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-sky-500 focus:border-sky-500 pr-10"
+                  disabled={isLoading}
+                />
+                <span
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 cursor-pointer"
+                >
+                  {showPassword ? (
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                      />
+                    </svg>
+                  )}
+                </span>
+              </div>
             </div>
 
             <div className="flex items-center justify-between">

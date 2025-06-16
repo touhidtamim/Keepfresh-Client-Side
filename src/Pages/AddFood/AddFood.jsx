@@ -1,10 +1,17 @@
 import React from "react";
 import AddFoodIntro from "./AddFoodIntro";
+import ActionNotice from "./../../Components/ActionNotice";
 
 const AddFood = () => {
   return (
     <>
       <AddFoodIntro />
+      <ActionNotice
+        message="Want to check or update your saved foods?"
+        subMessage="Click the button to view your food list."
+        linkText="View All"
+        linkTo="/my-items"
+      />
     </>
   );
 };

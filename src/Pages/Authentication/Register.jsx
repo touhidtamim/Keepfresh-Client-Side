@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import { Link, useNavigate } from "react-router-dom";
 import {
   getAuth,
@@ -8,8 +10,6 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 

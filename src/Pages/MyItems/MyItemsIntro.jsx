@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 
 const MyItemsIntro = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center bg-gradient-to-b from-[#fcfdfd] to-[#e8f1f6] h-[30vh] lg:min-h-[45vh] text-center overflow-hidden px-4">
+    <div className="relative flex flex-col items-center justify-center bg-gradient-to-b from-[#f9fbfc] to-[#eef2f5] h-[30vh] lg:min-h-[45vh] text-center overflow-hidden px-4">
       {/* Tagline */}
       <motion.h1
         initial={{ y: -30, opacity: 0 }}
