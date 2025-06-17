@@ -96,7 +96,7 @@ const Navbar = () => {
               <div className="flex-shrink-0 flex items-center">
                 <img
                   className="h-15 lg:h-18 w-auto pb-3 py-1"
-                  src="/src/assets/logo-transparent.png"
+                  src="https://i.postimg.cc/d3YdpZK1/logo-transparent.png"
                   alt="Logo"
                 />
               </div>

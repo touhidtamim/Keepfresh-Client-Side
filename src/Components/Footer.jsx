@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="space-y-4">
           <Link to="/" className="flex items-center group">
             <img
-              src="/src/assets/logo-transparent.png"
+              src="https://i.postimg.cc/d3YdpZK1/logo-transparent.png"
               alt="logo"
               className="h-12 md:h-14 transition-transform group-hover:scale-105"
             />
