@@ -27,7 +27,7 @@ const FoodDetails = () => {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/items/${id}`)
+    fetch(`https://keep-fresh-server-side.vercel.app/items/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load item.");
         return res.json();
@@ -75,11 +75,14 @@ const FoodDetails = () => {
 
   // Add note
   const handleNoteAddOrUpdate = async (noteText) => {
-    const res = await fetch(`http://localhost:5000/items/${id}/note`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userEmail, text: noteText }),
-    });
+    const res = await fetch(
+      `https://keep-fresh-server-side.vercel.app/items/${id}/note`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userEmail, text: noteText }),
+      }
+    );
 
     const data = await res.json();
     if (!data.success) throw new Error("Failed to save note.");
@@ -95,11 +98,14 @@ const FoodDetails = () => {
 
   // Delete note
   const handleNoteDelete = async () => {
-    const res = await fetch(`http://localhost:5000/items/${id}/note`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userEmail }),
-    });
+    const res = await fetch(
+      `https://keep-fresh-server-side.vercel.app/items/${id}/note`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userEmail }),
+      }
+    );
 
     const data = await res.json();
     if (!data.success) throw new Error("Failed to delete note.");

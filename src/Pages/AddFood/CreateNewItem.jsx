@@ -86,7 +86,10 @@ const CreateNewItem = () => {
     };
 
     try {
-      const res = await axios.post("http://localhost:5000/items", foodItem);
+      const res = await axios.post(
+        "https://keep-fresh-server-side.vercel.app/items",
+        foodItem
+      );
 
       if (res.data?.insertedId) {
         toast.success(" Food item added successfully!");

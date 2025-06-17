@@ -9,7 +9,7 @@ const NearlyExpiryItems = () => {
   const itemsPerPage = 6;
 
   useEffect(() => {
-    fetch("http://localhost:5000/items")
+    fetch("https://keep-fresh-server-side.vercel.app/items")
       .then((res) => res.json())
       .then((data) => {
         const today = new Date();

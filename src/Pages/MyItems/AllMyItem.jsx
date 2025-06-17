@@ -23,7 +23,7 @@ const AllMyItems = () => {
     setLoadingItems(true);
     try {
       const res = await axios.get(
-        `http://localhost:5000/my-items?email=${user.email}`
+        `https://keep-fresh-server-side.vercel.app/my-items?email=${user.email}`
       );
       setItems(res.data);
     } catch (error) {
@@ -54,7 +54,9 @@ const AllMyItems = () => {
     setModalLoading(true);
     setModalError(null);
     try {
-      await axios.delete(`http://localhost:5000/items/${id}`);
+      await axios.delete(
+        `https://keep-fresh-server-side.vercel.app/items/${id}`
+      );
       toast.success("Item deleted successfully");
       setIsDeleteModalOpen(false);
       fetchItems();

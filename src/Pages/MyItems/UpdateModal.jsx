@@ -53,7 +53,7 @@ const UpdateModal = ({
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/items/${item._id}`,
+        `https://keep-fresh-server-side.vercel.app/items/${item._id}`,
         formData
       );
       if (res.status === 200) {

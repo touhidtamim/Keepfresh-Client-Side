@@ -8,7 +8,9 @@ const NotificationAlert = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/notifications/${user.email}`)
+      fetch(
+        `https://keep-fresh-server-side.vercel.app/notifications/${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => setNotifications(data))
         .catch((err) => console.error("Notification fetch error:", err));
