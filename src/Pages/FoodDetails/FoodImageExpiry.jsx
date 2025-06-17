@@ -6,7 +6,7 @@ const FoodImageExpiry = ({ foodImage, foodTitle, isExpired }) => {
       <img
         src={
           foodImage ||
-          "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
+          "https://i.postimg.cc/3xQgzDmK/800px-Image-not-available.png"
         }
         alt={foodTitle}
         className="w-full h-72 object-cover"
