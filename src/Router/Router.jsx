@@ -17,6 +17,7 @@ import MyItems from "../Pages/MyItems/MyItems";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Notification from "../Pages/Notification/Notification";
 import PrivateRouter from "./PrivateRouter";
+import FoodDetails from "../Pages/FoodDetails/FoodDetails";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,15 @@ const router = createBrowserRouter([
       {
         path: "/fridge",
         element: <Fridge />,
+      },
+
+      {
+        path: "/items/:id",
+        element: (
+          <PrivateRouter>
+            <FoodDetails />
+          </PrivateRouter>
+        ),
       },
 
       {

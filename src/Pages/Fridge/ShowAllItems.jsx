@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const ShowAllItems = () => {
   const [items, setItems] = useState([]);
@@ -157,13 +158,15 @@ const ShowAllItems = () => {
                   >
                     Expiry: {new Date(item.expiryDate).toLocaleDateString()}
                   </p>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 rounded-lg"
-                  >
-                    See Details
-                  </motion.button>
+                  <Link to={`/items/${item._id}`}>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full cursor-pointer bg-gradient-to-r from-sky-500 to-sky-800 text-white py-2 rounded-lg"
+                    >
+                      See Details
+                    </motion.button>
+                  </Link>
                 </div>
               </motion.div>
             ))}
@@ -175,7 +178,7 @@ const ShowAllItems = () => {
               {visibleCount < items.length ? (
                 <button
                   onClick={handleShowMore}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all"
+                  className="bg-sky-600 cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-sky-700 transition-all"
                 >
                   Show More
                 </button>

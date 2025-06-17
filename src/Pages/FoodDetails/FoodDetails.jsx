@@ -1,0 +1,161 @@
+import React, { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { AuthContext } from "../../Provider/AuthProvider";
+
+import FoodImageExpiry from "./FoodImageExpiry";
+import FoodTitleDescription from "./FoodTitleDescription";
+import FoodBasicInfo from "./FoodBasicInfo";
+import FoodCountdown from "./FoodCountdown";
+import FoodNotes from "./FoodNotes";
+import FoodDetailsIntro from "./FoodDetailsIntro";
+
+const FoodDetails = () => {
+  const { id } = useParams();
+  const { user } = useContext(AuthContext);
+  const userEmail = user?.email || "";
+
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [noteText, setNoteText] = useState("");
+  const [showNoteForm, setShowNoteForm] = useState(false);
+  const [countdown, setCountdown] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    expired: false,
+  });
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/items/${id}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to load item.");
+        return res.json();
+      })
+      .then((data) => {
+        setItem(data);
+        setLoading(false);
+        if (data.note?.text) {
+          setShowNoteForm(false);
+          setNoteText("");
+        } else {
+          setShowNoteForm(userEmail === data.userEmail);
+        }
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [id, userEmail]);
+
+  useEffect(() => {
+    if (!item?.expiryDate) return;
+
+    const updateCountdown = () => {
+      const now = new Date();
+      const expiry = new Date(item.expiryDate);
+      const diff = expiry - now;
+
+      if (diff <= 0) {
+        setCountdown({ days: 0, hours: 0, minutes: 0, expired: true });
+        return true;
+      }
+
+      setCountdown({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        expired: false,
+      });
+      return false;
+    };
+
+    if (updateCountdown()) return;
+
+    const interval = setInterval(updateCountdown, 60000);
+    return () => clearInterval(interval);
+  }, [item]);
+
+  const isOwner = userEmail === item?.userEmail;
+  const isExpired = countdown.expired;
+
+  const handleNoteSubmit = () => {
+    if (!noteText.trim()) return;
+    fetch(`http://localhost:5000/items/${id}/note`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userEmail, text: noteText.trim() }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setItem((prev) => ({
+            ...prev,
+            note: {
+              text: noteText.trim(),
+              createdAt: new Date().toISOString(),
+            },
+          }));
+          setShowNoteForm(false);
+          setNoteText("");
+        }
+      });
+  };
+
+  if (error)
+    return (
+      <div className="text-center text-red-600 mt-10 text-xl">{error}</div>
+    );
+
+  if (!item)
+    return (
+      <div className="text-center text-red-600 mt-10 text-xl">
+        Item not found.
+      </div>
+    );
+
+  return (
+    <div className="md:pb-20">
+      <FoodDetailsIntro />
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md mt-10 space-y-8"
+      >
+        <FoodImageExpiry
+          foodImage={item.foodImage}
+          foodTitle={item.foodTitle}
+          isExpired={isExpired}
+        />
+
+        <FoodTitleDescription
+          foodTitle={item.foodTitle}
+          description={item.description}
+        />
+
+        <FoodBasicInfo
+          category={item.category}
+          quantity={item.quantity}
+          expiryDate={item.expiryDate}
+          userEmail={item.userEmail}
+        />
+
+        <FoodCountdown isExpired={isExpired} countdown={countdown} />
+
+        <FoodNotes
+          isOwner={isOwner}
+          showNoteForm={showNoteForm}
+          setShowNoteForm={setShowNoteForm}
+          noteText={noteText}
+          setNoteText={setNoteText}
+          handleNoteSubmit={handleNoteSubmit}
+          note={item.note}
+        />
+      </motion.div>
+    </div>
+  );
+};
+
+export default FoodDetails;
