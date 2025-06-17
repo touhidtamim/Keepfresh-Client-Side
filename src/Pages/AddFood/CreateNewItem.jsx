@@ -89,7 +89,7 @@ const CreateNewItem = () => {
       const res = await axios.post("http://localhost:5000/items", foodItem);
 
       if (res.data?.insertedId) {
-        toast.success("✅ Food item added successfully!");
+        toast.success(" Food item added successfully!");
 
         setFormData({
           title: "",
@@ -104,11 +104,11 @@ const CreateNewItem = () => {
           navigate("/my-items");
         }, 1200);
       } else {
-        toast.error("❌ Failed to add food. Try again.");
+        toast.error(" Failed to add food. Try again.");
       }
     } catch (error) {
       console.error("Error while adding food:", error);
-      toast.error("❌ Something went wrong!");
+      toast.error(" Something went wrong!");
     } finally {
       setIsSubmitting(false);
     }
