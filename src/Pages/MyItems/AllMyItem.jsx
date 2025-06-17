@@ -16,7 +16,7 @@ const AllMyItems = () => {
   const [modalLoading, setModalLoading] = useState(false);
   const [modalError, setModalError] = useState(null);
 
-  // Fetch user items from backend
+  // Fetch items
   const fetchItems = async () => {
     if (!user?.email) return;
 
@@ -151,7 +151,7 @@ const AllMyItems = () => {
         />
       )}
 
-      {/* Show modal error messages */}
+      {/* Show modal error */}
       {modalError && (
         <p className="mt-4 text-center text-red-600 font-semibold">
           {modalError}

@@ -25,7 +25,7 @@ const UpdateModal = ({
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setModalError(null); // clear error on input change
+    setModalError(null);
   };
 
   const validate = () => {
@@ -59,7 +59,7 @@ const UpdateModal = ({
       if (res.status === 200) {
         toast.success("Item updated successfully");
         onUpdated();
-        onClose(); // close modal after success
+        onClose();
       } else {
         setModalError("Failed to update item");
       }

@@ -20,7 +20,6 @@ const ForgotPassword = () => {
         </div>
 
         <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-          {/* Success message placeholder (hidden by default) */}
           <div className="hidden mb-4 p-3 rounded-lg bg-green-100 text-green-700 text-sm">
             Password reset link has been sent to your email
           </div>

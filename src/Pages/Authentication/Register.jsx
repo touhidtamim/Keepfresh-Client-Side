@@ -40,7 +40,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic password validation before submission
+    //  password validation
     if (
       !passwordValid.hasUpper ||
       !passwordValid.hasLower ||
@@ -57,14 +57,14 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      // Create user with email and password
+      // Create user
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
 
-      // Update user profile with name and photoURL
+      // Update user
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, {
           displayName: formData.name,
@@ -85,7 +85,7 @@ const Register = () => {
       // Clear form
       setFormData({ name: "", email: "", photoURL: "", password: "" });
 
-      // Redirect to home or login page
+      // Redirect to home
       navigate("/");
     } catch (error) {
       MySwal.fire({
@@ -177,7 +177,7 @@ const Register = () => {
               />
             </div>
 
-            {/* Photo URL (Optional) */}
+            {/* Photo URL */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Profile Photo URL
@@ -251,7 +251,7 @@ const Register = () => {
                 </button>
               </div>
 
-              {/* Password Validation Indicators (Original Design) */}
+              {/* Password Validation */}
               <div className="mt-2 text-xs text-gray-600 space-y-1">
                 <div
                   className={`flex items-center ${
@@ -394,7 +394,7 @@ const Register = () => {
             </motion.button>
           </form>
 
-          {/* Social Login */}
+          {/* Google Login */}
           <div className="mt-6">
             <div className="relative flex items-center py-4">
               <div className="flex-grow border-t border-gray-300"></div>
@@ -437,7 +437,7 @@ const Register = () => {
           </div>
         </div>
 
-        {/* Login Link */}
+        {/* Login Toggle */}
         <div className="mt-6 text-center text-sm">
           Already have an account?{" "}
           <Link

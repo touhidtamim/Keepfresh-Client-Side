@@ -29,7 +29,7 @@ const ProfileCard = () => {
     <div className=" bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col lg:flex-row">
-          {/* Left Side - Profile Image and Basic Info */}
+          {/* Left Side */}
           <div className="lg:w-1/3 bg-gradient-to-b from-indigo-400 to-indigo-800 p-8 text-center lg:text-left flex flex-col items-center lg:items-start">
             <div className="relative w-32 h-32 rounded-full border-4 border-white shadow-lg overflow-hidden mb-6">
               <img
@@ -74,7 +74,7 @@ const ProfileCard = () => {
             )}
           </div>
 
-          {/* Right Side - Profile Details */}
+          {/* Right Side  */}
           <div className="lg:w-2/3 p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               Profile Information

@@ -4,13 +4,16 @@ import HeroSlider from "./../../Components/Slider/HeroSlider";
 import BlogPreviewCard from "./BlogPreviewCard";
 import HowItWorks from "./../../Components/HowItWorks/HowItWorks";
 import BMIPreviewCard from "./BMIPreviewCard";
+import ExpiredItems from "./ExpiredItems";
+import NearlyExpiryItems from "./NearlyExpiryItems";
 
 const Home = () => {
   return (
     <div>
       <HeroHighlights />
       <HeroSlider />
-      <div className="text-center text-4xl">This is Home</div>
+      <NearlyExpiryItems />
+      <ExpiredItems />
       <BlogPreviewCard />
       <HowItWorks />
       <BMIPreviewCard />

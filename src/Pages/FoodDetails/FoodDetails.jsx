@@ -18,8 +18,7 @@ const FoodDetails = () => {
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [noteText, setNoteText] = useState("");
-  const [showNoteForm, setShowNoteForm] = useState(false);
+
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -36,18 +35,12 @@ const FoodDetails = () => {
       .then((data) => {
         setItem(data);
         setLoading(false);
-        if (data.note?.text) {
-          setShowNoteForm(false);
-          setNoteText("");
-        } else {
-          setShowNoteForm(userEmail === data.userEmail);
-        }
       })
       .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
-  }, [id, userEmail]);
+  }, [id]);
 
   useEffect(() => {
     if (!item?.expiryDate) return;
@@ -77,31 +70,48 @@ const FoodDetails = () => {
     return () => clearInterval(interval);
   }, [item]);
 
-  const isOwner = userEmail === item?.userEmail;
+  const isOwner = userEmail === item?.addedBy;
   const isExpired = countdown.expired;
 
-  const handleNoteSubmit = () => {
-    if (!noteText.trim()) return;
-    fetch(`http://localhost:5000/items/${id}/note`, {
+  // Add note
+  const handleNoteAddOrUpdate = async (noteText) => {
+    const res = await fetch(`http://localhost:5000/items/${id}/note`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userEmail, text: noteText.trim() }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setItem((prev) => ({
-            ...prev,
-            note: {
-              text: noteText.trim(),
-              createdAt: new Date().toISOString(),
-            },
-          }));
-          setShowNoteForm(false);
-          setNoteText("");
-        }
-      });
+      body: JSON.stringify({ userEmail, text: noteText }),
+    });
+
+    const data = await res.json();
+    if (!data.success) throw new Error("Failed to save note.");
+
+    setItem((prev) => ({
+      ...prev,
+      note: {
+        text: noteText,
+        createdAt: new Date().toISOString(),
+      },
+    }));
   };
+
+  // Delete note
+  const handleNoteDelete = async () => {
+    const res = await fetch(`http://localhost:5000/items/${id}/note`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userEmail }),
+    });
+
+    const data = await res.json();
+    if (!data.success) throw new Error("Failed to delete note.");
+
+    setItem((prev) => ({
+      ...prev,
+      note: null,
+    }));
+  };
+
+  if (loading)
+    return <div className="text-center mt-10 text-xl">Loading...</div>;
 
   if (error)
     return (
@@ -125,13 +135,13 @@ const FoodDetails = () => {
         className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md mt-10 space-y-8"
       >
         <FoodImageExpiry
-          foodImage={item.foodImage}
-          foodTitle={item.foodTitle}
+          foodImage={item.image}
+          foodTitle={item.title}
           isExpired={isExpired}
         />
 
         <FoodTitleDescription
-          foodTitle={item.foodTitle}
+          foodTitle={item.title}
           description={item.description}
         />
 
@@ -139,19 +149,16 @@ const FoodDetails = () => {
           category={item.category}
           quantity={item.quantity}
           expiryDate={item.expiryDate}
-          userEmail={item.userEmail}
+          userEmail={item.addedBy}
         />
 
         <FoodCountdown isExpired={isExpired} countdown={countdown} />
 
         <FoodNotes
           isOwner={isOwner}
-          showNoteForm={showNoteForm}
-          setShowNoteForm={setShowNoteForm}
-          noteText={noteText}
-          setNoteText={setNoteText}
-          handleNoteSubmit={handleNoteSubmit}
           note={item.note}
+          onNoteAddOrUpdate={handleNoteAddOrUpdate}
+          onNoteDelete={handleNoteDelete}
         />
       </motion.div>
     </div>

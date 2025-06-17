@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { FiMenu, FiX, FiBell, FiLogOut } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
@@ -9,11 +9,25 @@ const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const isLoggedIn = !!user;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   const defaultAvatar =
     "https://i.postimg.cc/0QTwptyd/png-transparent-default-avatar-thumbnail.png";
+
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`http://localhost:5000/notifications/${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.length > 0) {
+            setHasUnreadNotifications(true);
+          }
+        })
+        .catch((err) => console.error("Notification fetch error:", err));
+    }
+  }, [user]);
 
   const loggedOutLinks = [
     { name: "Home", path: "/" },
@@ -63,9 +77,7 @@ const Navbar = () => {
   return (
     <nav className="relative bg-[#f9fbfc] text-gray-900 font-medium">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Navbar */}
         <div className="flex justify-between items-center h-16">
-          {/* Left side - Logo and Hamburger (mobile & tablet) */}
           <div className="flex items-center">
             <button
               className="lg:hidden py-2 mr-1 rounded-md hover:bg-white focus:outline-none"
@@ -78,7 +90,6 @@ const Navbar = () => {
               )}
             </button>
 
-            {/* Logo */}
             <Link to="/" className="ml-2 lg:ml-0">
               <div className="flex-shrink-0 flex items-center">
                 <img
@@ -90,7 +101,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Middle - Navigation Links (desktop only) */}
           <div className="hidden lg:flex lg:items-center lg:space-x-1">
             {(isLoggedIn ? loggedInLinks : loggedOutLinks).map((link) => (
               <Link
@@ -107,20 +117,28 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Right side - Auth/User controls */}
           <div className="flex items-center space-x-3">
             {isLoggedIn ? (
               <>
-                {/* Notification Button */}
-                <button
-                  className="p-2 cursor-pointer rounded-full hover:bg-sky-100 transition"
-                  onClick={() => navigate("/notifications")}
-                  title="Notifications"
-                >
-                  <FiBell className="h-5 w-5 text-gray-700" />
-                </button>
+                <div className="relative">
+                  <button
+                    className="p-2 cursor-pointer rounded-full hover:bg-sky-100 transition"
+                    onClick={() => {
+                      setHasUnreadNotifications(false);
+                      navigate("/notifications");
+                    }}
+                    title="Notifications"
+                  >
+                    <FiBell className="h-5 w-5 text-gray-700" />
+                  </button>
+                  {hasUnreadNotifications && (
+                    <>
+                      <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-600 animate-ping"></span>
+                      <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-600"></span>
+                    </>
+                  )}
+                </div>
 
-                {/* Avatar with hover tooltip and click to dashboard */}
                 <div className="relative group cursor-pointer">
                   <HashLink to="/dashboard#profile" smooth>
                     <img
@@ -135,10 +153,9 @@ const Navbar = () => {
                   </div>
                 </div>
 
-                {/* Logout */}
                 <button
                   onClick={handleLogout}
-                  className=" hidden cursor-pointer lg:flex items-center gap-1 px-3 py-2 rounded-md text-md text-red-600 hover:bg-red-100"
+                  className="hidden cursor-pointer lg:flex items-center gap-1 px-3 py-2 rounded-md text-md text-red-600 hover:bg-red-100"
                 >
                   <FiLogOut />
                   Logout
@@ -164,8 +181,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile & Tablet menu */}
-      {/* Mobile & Tablet menu */}
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 w-full bg-gray-50 shadow-md z-40 lg:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">

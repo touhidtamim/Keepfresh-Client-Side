@@ -44,12 +44,12 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  // Update user profile
+  // Update profile
   const updateUser = (userInfo) => {
     return updateProfile(auth.currentUser, userInfo);
   };
 
-  // Observe user state
+  // Observe user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);

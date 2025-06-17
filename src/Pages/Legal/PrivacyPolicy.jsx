@@ -92,7 +92,7 @@ const PrivacyPolicy = () => {
           </p>
         </div>
 
-        {/* Back to Home Button */}
+        {/* Back to Home */}
         <div className="mt-12 text-center">
           <Link
             to="/"
