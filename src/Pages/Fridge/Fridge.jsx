@@ -1,12 +1,15 @@
 import React from "react";
 import FridgeIntro from "./FridgeIntro";
 import ActionNotice from "../../Components/ActionNotice";
+import ShowAllItems from "./ShowAllItems";
 
 const Fridge = () => {
   return (
     <>
       <FridgeIntro />
-      <h1>Fridge</h1>
+
+      <ShowAllItems />
+
       <ActionNotice
         message="Want to review your expired food items?"
         subMessage="Go to your dashboard to see what's no longer fresh."
