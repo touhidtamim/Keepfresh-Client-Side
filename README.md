@@ -88,19 +88,27 @@
 
 ## 💻 Running Locally & Contribution Guide
 
-This project’s **backend (server) code is maintained in a separate GitHub repository with the same name**.  
+This project’s **backend (server) code** is maintained in a separate GitHub repository with the same name.
 
-If you want to run the project locally or contribute:  
+If you want to run the project locally or contribute:
+
 - Clone both the frontend and backend repositories.  
-- Follow the instructions in each repo to install dependencies and set up environment variables.  
-- Run the backend server first, then the frontend development server.  
+- Follow the instructions in each repository to install dependencies and set up environment variables.  
+- Run the backend server first, then start the frontend development server.
 
-If you encounter any issues, want to suggest improvements, or contribute code, please feel free to contact me through my GitHub profile. I welcome contributions and am happy to assist you!
+If you encounter any issues, want to suggest improvements, or contribute code, please feel free to contact me via my GitHub profile. I welcome contributions and am happy to assist you!
 
 ---
 
-**Backend repository link:** [https://github.com/touhidtamim/Keepfresh-Server-Side](https://github.com/touhidtamim/Keepfresh-Server-Side)
-**Frontend repository link:** [https://github.com/touhidtamim/Keepfresh-Client-Side](https://github.com/touhidtamim/Keepfresh-Client-Side)
+### 🔗 Repository Links
+
+- **Backend (Server) Repository:**  
+  [https://github.com/touhidtamim/Keepfresh-Server-Side](https://github.com/touhidtamim/Keepfresh-Server-Side)  
+  
+- **Frontend (Client) Repository:**  
+  [https://github.com/touhidtamim/Keepfresh-Client-Side](https://github.com/touhidtamim/Keepfresh-Client-Side)
+
+
 ---
 
 ## 👤 Developed By
