@@ -186,10 +186,7 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 w-full bg-gray-50 shadow-md z-40 lg:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {(isLoggedIn
-              ? loggedInLinks.filter((link) => link.name !== "Home")
-              : loggedOutLinks.filter((link) => link.name !== "Home")
-            ).map((link) => (
+            {(isLoggedIn ? loggedInLinks : loggedOutLinks).map((link) => (
               <Link
                 key={link.name}
                 to={link.path}

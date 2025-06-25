@@ -25,7 +25,7 @@ const SlideThree = () => {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen bg-gradient-to-br from-teal-50 to-white py-16 px-6 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20"
+      className="h-full lg:min-h-screen bg-gradient-to-br from-teal-50 to-white py-16 px-6 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20"
     >
       {/* Left Content */}
       <motion.div className="flex-1 max-w-md" style={{ y: yText, opacity }}>
@@ -104,7 +104,7 @@ const SlideThree = () => {
 
       {/* Right Content - HIDDEN on mobile */}
       <motion.div
-        className="flex-1 max-w-xl relative hidden sm:block"
+        className="flex-1 max-w-xl relative hidden lg:block"
         style={{ y: yImage, opacity }}
       >
         <motion.div

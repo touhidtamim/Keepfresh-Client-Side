@@ -27,7 +27,7 @@ const SlideTwo = () => {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen bg-gradient-to-br from-white via-[#f9fafc] to-[#f1f5fb] py-16 px-4 sm:px-6 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 relative overflow-hidden"
+      className="h-full lg:min-h-screen bg-gradient-to-br from-white via-[#f9fafc] to-[#f1f5fb] py-16 px-4 sm:px-6 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 relative overflow-hidden"
     >
       {/* Background emoji */}
       <div className="absolute text-6xl opacity-10 -top-10 right-5 animate-pulse">
@@ -111,7 +111,7 @@ const SlideTwo = () => {
 
       {/* Right side */}
       <motion.div
-        className="flex-1 max-w-xl z-10 w-full hidden sm:block"
+        className="flex-1 max-w-xl z-10 w-full hidden lg:block"
         style={{ y: yImage, opacity }}
       >
         <motion.div

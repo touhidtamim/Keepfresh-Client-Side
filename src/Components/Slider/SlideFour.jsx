@@ -17,7 +17,7 @@ const SlideFour = () => {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen bg-gradient-to-tl from-white via-indigo-50 to-white py-16 px-4 sm:px-8 md:px-16 flex flex-col items-center justify-center text-center"
+      className="relative h-full lg:min-h-screen bg-gradient-to-tl from-white via-indigo-50 to-white py-16 px-4 sm:px-8 md:px-16 flex flex-col items-center justify-center text-center"
     >
       <motion.div style={{ y }} className="max-w-xl sm:max-w-2xl">
         <motion.h2
