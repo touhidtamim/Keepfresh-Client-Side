@@ -7,6 +7,7 @@ const BlogList = () => {
   const [error, setError] = useState(null);
   const [expandedBlog, setExpandedBlog] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 6;
 
@@ -31,13 +32,16 @@ const BlogList = () => {
     setExpandedBlog(expandedBlog === id ? null : id);
   };
 
-  const filteredBlogs = blogs.filter(
-    (blog) =>
-      blog.heading.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      blog.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredBlogs = blogs
+    .filter(
+      (blog) =>
+        blog.heading.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        blog.description.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter((blog) => (filter === "all" ? true : blog.category === filter));
 
-  // Pagination logic
+  const categories = [...new Set(blogs.map((blog) => blog.category))];
+
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
@@ -57,15 +61,6 @@ const BlogList = () => {
     }
   };
 
-  const gradientColors = [
-    "from-blue-50 to-white",
-    "from-sky-50 to-white",
-    "from-blue-50 to-white",
-    "from-green-50 to-white",
-    "from-purple-50 to-white",
-    "from-indigo-50 to-white",
-  ];
-
   if (loading)
     return (
       <div className="flex justify-center items-center h-64">
@@ -77,8 +72,37 @@ const BlogList = () => {
     return (
       <div className="text-center py-10">
         <div className="inline-flex items-center px-4 py-2 bg-red-100 text-red-700 rounded-lg">
+          Error: {error}
+        </div>
+      </div>
+    );
+
+  return (
+    <div className="dark:bg-gray-900 dark:text-white bg-white text-black min-h-screen p-6 space-y-10">
+      <div className="text-center space-y-2">
+        <h1 className="text-3xl md:text-4xl font-bold">
+          Knowledge today, less waste tomorrow
+        </h1>
+        <p className="text-gray-600 dark:text-gray-300">
+          Your guide to smart food habits & mindful living
+        </p>
+      </div>
+
+      {/* Search & Filter */}
+      <div className="max-w-3xl mx-auto flex flex-col sm:flex-row gap-4 items-center">
+        <div className="relative w-full">
+          <input
+            type="text"
+            placeholder="Search blogs..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none bg-white dark:bg-gray-800 dark:text-white"
+          />
           <svg
-            className="w-5 h-5 mr-2"
+            className="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -87,165 +111,60 @@ const BlogList = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
           </svg>
-          Error: {error}
         </div>
-      </div>
-    );
-
-  return (
-    <div className="max-w-6xl mx-auto p-6 space-y-8">
-      {/* Search */}
-      <div className="relative max-w-md mx-auto">
-        <input
-          type="text"
-          placeholder="Search blogs..."
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-        />
-        <svg
-          className="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="w-full sm:w-48 py-2 px-3 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
+          <option value="all">All Categories</option>
+          {categories.map((cat, idx) => (
+            <option key={idx} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
       </div>
-
-      {searchTerm && (
-        <p className="text-center text-gray-600">
-          Found {filteredBlogs.length}{" "}
-          {filteredBlogs.length === 1 ? "result" : "results"}
-        </p>
-      )}
 
       {/* Blog Cards */}
-      {currentBlogs.map(({ id, heading, description, image, tips }, index) => {
-        const isEven = index % 2 === 0;
-        const isExpanded = expandedBlog === id;
-        const gradientClass = gradientColors[index % gradientColors.length];
-
-        return (
-          <motion.article
-            key={id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`rounded-xl overflow-hidden bg-gradient-to-br ${gradientClass} shadow-md ${
-              isExpanded ? "ring-2 ring-blue-500" : "hover:shadow-lg"
-            } transition-all duration-300`}
-          >
-            <div
-              className={`flex flex-col md:flex-row ${
-                isEven ? "md:flex-row" : "md:flex-row-reverse"
-              }`}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {currentBlogs.map(
+          ({ id, heading, description, image, tips }, index) => (
+            <motion.div
+              key={id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="rounded-xl bg-sky-50 dark:bg-gray-800 p-4 shadow hover:shadow-lg transition-all duration-300 flex flex-col h-full"
             >
-              <div className="md:w-1/3 h-64 md:h-auto relative overflow-hidden">
+              <div className="h-48 w-full overflow-hidden rounded-lg mb-4">
                 <img
                   src={image}
                   alt={heading}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
+              <h2 className="text-xl font-bold mb-2">{heading}</h2>
+              <p className="text-gray-700 dark:text-gray-300 flex-1">
+                {expandedBlog === id
+                  ? description
+                  : `${description.slice(0, 100)}...`}
+              </p>
+              <button
+                onClick={() => toggleExpand(id)}
+                className="mt-4 text-blue-600 hover:text-blue-800 dark:hover:text-blue-400 font-medium"
+              >
+                {expandedBlog === id ? "Show Less" : "Read More"}
+              </button>
+            </motion.div>
+          )
+        )}
+      </div>
 
-              <div className="md:w-2/3 p-6 md:p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                  {heading}
-                </h2>
-                <p className="text-gray-700 mb-4">
-                  {isExpanded
-                    ? description
-                    : `${description.split("\n")[0]}...`}
-                </p>
-                <button
-                  onClick={() => toggleExpand(id)}
-                  className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
-                >
-                  {isExpanded ? "Show Less" : "Read More"}
-                  <svg
-                    className={`w-4 h-4 ml-1 transition-transform ${
-                      isExpanded ? "rotate-180" : ""
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-
-                {isExpanded && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    transition={{ duration: 0.3 }}
-                    className="mt-6"
-                  >
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                      <svg
-                        className="w-5 h-5 mr-2 text-blue-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M13 10V3L4 14h7v7l9-11h-7z"
-                        />
-                      </svg>
-                      Key Tips
-                    </h3>
-                    <ul className="space-y-2">
-                      {tips.map((tip, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <span className="flex-shrink-0 h-5 w-5 text-blue-500 mr-2 mt-0.5">
-                            <svg
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                          </span>
-                          <span className="text-gray-600">{tip}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                )}
-              </div>
-            </div>
-          </motion.article>
-        );
-      })}
-
-      {/* Pagination Controls */}
+      {/* Pagination */}
       {filteredBlogs.length > blogsPerPage && (
         <div className="flex justify-center items-center gap-4 mt-10">
           <button
@@ -259,7 +178,7 @@ const BlogList = () => {
           >
             Previous
           </button>
-          <span className="text-gray-700">
+          <span className="text-gray-700 dark:text-gray-300">
             Page {currentPage} of {totalPages}
           </span>
           <button

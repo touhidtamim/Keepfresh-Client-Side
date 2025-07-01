@@ -12,12 +12,11 @@ const MainLayout = () => {
   return (
     <>
       <Navbar></Navbar>
-
       <ScrollToTop></ScrollToTop>
       <ToastContainer />
       {navigation.state === "loading" && <Spinner />}
 
-      <div className="bg-[#f9fbfc] min-h-[90vh] pt-15">
+      <div className="bg-[#f9fbfc] min-h-[90vh]">
         <Outlet />
       </div>
 

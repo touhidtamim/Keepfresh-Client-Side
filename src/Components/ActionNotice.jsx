@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const ActionNotice = ({ message, subMessage, linkText, linkTo }) => {
   return (
-    <div className="max-w-3xl mx-auto bg-gray-200 border border-gray-600 px-4 sm:px-6 py-3 my-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0 rounded-md text-sm text-center sm:text-left">
+    <div className="max-w-3xl mx-auto bg-gray-200 border border-gray-600 px-4 sm:px-6 py-3 my-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0 rounded-md text-sm text-center sm:text-left md:mx-10 lg:mx-auto">
       <p className="text-gray-800">
         <span className="mr-2">{message}</span>
         {subMessage && <span className="hidden sm:inline"> {subMessage}</span>}

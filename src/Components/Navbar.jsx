@@ -10,6 +10,7 @@ const Navbar = () => {
   const isLoggedIn = !!user;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -31,6 +32,15 @@ const Navbar = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const loggedOutLinks = [
     { name: "Home", path: "/" },
     { name: "Fridge", path: "/fridge" },
@@ -48,9 +58,11 @@ const Navbar = () => {
     { name: "Dashboard", path: "/dashboard" },
   ];
 
-  const activeLinkClass = "bg-sky-200 text-gray-900 font-semibold";
+  const activeLinkClass =
+    "bg-sky-200 dark:bg-sky-700 text-gray-900 dark:text-white font-semibold";
+
   const normalLinkClass =
-    "hover:bg-sky-100 hover:text-gray-900 transition duration-300";
+    "relative inline-block font-semibold text-gray-800 dark:text-gray-200 transition duration-300 hover:text-gray-900 dark:hover:text-white after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[1.5px] after:bg-black dark:after:bg-white after:transition-all after:duration-300 hover:after:w-full after:rounded";
 
   const handleLogout = async () => {
     const result = await Swal.fire({
@@ -77,18 +89,25 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="relative bg-[#f9fbfc] text-gray-900 font-medium">
+    <nav
+      className={`transition-all duration-300 py-1 border-b ${
+        isSticky
+          ? "fixed top-0 left-0 w-full bg-sky-50 dark:bg-gray-800 shadow-sm z-50 border-gray-200 dark:border-gray-700"
+          : "relative bg-sky-50 dark:bg-gray-900 border-transparent dark:border-gray-700"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+          {/* Logo & Menu */}
           <div className="flex items-center">
             <button
-              className="lg:hidden py-2 mr-1 rounded-md hover:bg-white focus:outline-none"
+              className="lg:hidden py-2 mr-1 rounded-md hover:bg-white dark:hover:bg-gray-700 focus:outline-none"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
-                <FiX className="h-6 w-6" />
+                <FiX className="h-6 w-6 text-gray-900 dark:text-white" />
               ) : (
-                <FiMenu className="h-6 w-6" />
+                <FiMenu className="h-6 w-6 text-gray-900 dark:text-white" />
               )}
             </button>
 
@@ -103,12 +122,13 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* Desktop Nav */}
           <div className="hidden lg:flex lg:items-center lg:space-x-1">
             {(isLoggedIn ? loggedInLinks : loggedOutLinks).map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`px-3 py-2 rounded-md text-sm ${
+                className={`px-3 py-1 rounded-md text-sm ${
                   location.pathname === link.path
                     ? activeLinkClass
                     : normalLinkClass
@@ -119,19 +139,21 @@ const Navbar = () => {
             ))}
           </div>
 
+          {/* Right Icons */}
           <div className="flex items-center space-x-3">
             {isLoggedIn ? (
               <>
+                {/* Notification */}
                 <div className="relative">
                   <button
-                    className="p-2 cursor-pointer rounded-full hover:bg-sky-100 transition"
+                    className="p-2 cursor-pointer rounded-full hover:bg-sky-100 dark:hover:bg-sky-800 transition"
                     onClick={() => {
                       setHasUnreadNotifications(false);
                       navigate("/notifications");
                     }}
                     title="Notifications"
                   >
-                    <FiBell className="h-5 w-5 text-gray-700" />
+                    <FiBell className="h-5 w-5 text-gray-700 dark:text-gray-200" />
                   </button>
                   {hasUnreadNotifications && (
                     <>
@@ -141,23 +163,25 @@ const Navbar = () => {
                   )}
                 </div>
 
+                {/* Avatar */}
                 <div className="relative group cursor-pointer">
                   <HashLink to="/dashboard#profile" smooth>
                     <img
                       src={user.photoURL || defaultAvatar}
                       alt="User"
                       title={user.displayName || "User"}
-                      className="h-9 w-9 rounded-full border border-gray-300 hover:ring-2 ring-sky-300 cursor-pointer"
+                      className="h-9 w-9 rounded-full border border-gray-300 dark:border-gray-600 hover:ring-2 ring-sky-300 dark:ring-sky-500 cursor-pointer"
                     />
                   </HashLink>
-                  <div className="absolute hidden group-hover:block bg-black text-white text-xs rounded px-2 py-1 top-full mt-1 right-0 z-50 whitespace-nowrap">
+                  <div className="absolute hidden group-hover:block bg-black dark:bg-gray-100 text-white dark:text-black text-xs rounded px-2 py-1 top-full mt-1 right-0 z-50 whitespace-nowrap">
                     {user.displayName || "User"}
                   </div>
                 </div>
 
+                {/* Logout */}
                 <button
                   onClick={handleLogout}
-                  className="hidden cursor-pointer lg:flex items-center gap-1 px-3 py-2 rounded-md text-md text-red-600 hover:bg-red-100"
+                  className="hidden cursor-pointer lg:flex items-center gap-1 px-3 py-2 rounded-md text-md text-red-600 hover:bg-red-100 dark:hover:bg-red-800"
                 >
                   <FiLogOut />
                   Logout
@@ -167,13 +191,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="btn bg-sky-300 lg:bg-white hover:bg-sky-100 px-3 py-2 rounded-md text-md hover:text-gray-900 transition duration-300"
+                  className="btn bg-sky-700 lg:bg-white dark:lg:bg-gray-700 hover:border-gray-800 px-3 py-2 rounded-md text-md hover:text-gray-900 dark:text-white dark:hover:text-white transition duration-300"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="hidden lg:block px-3 py-2 rounded-md text-sm bg-blue-600 text-white hover:bg-blue-700 transition duration-300"
+                  className="hidden lg:block px-3 py-2 rounded-md text-sm bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-800 transition duration-300"
                 >
                   Get Started
                 </Link>
@@ -184,8 +208,8 @@ const Navbar = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-gray-50 shadow-md z-40 lg:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="absolute top-full left-0 w-full bg-gray-50 dark:bg-gray-800 shadow-md z-40 lg:hidden">
+          <div className="flex flex-col px-2 pt-2 pb-3 space-y-2 sm:px-3">
             {(isLoggedIn ? loggedInLinks : loggedOutLinks).map((link) => (
               <Link
                 key={link.name}
@@ -203,7 +227,7 @@ const Navbar = () => {
 
             {isLoggedIn && (
               <button
-                className="w-full flex items-center justify-center px-3 py-2 rounded-md text-base text-red-700 bg-red-100 hover:bg-red-200"
+                className="w-full flex items-center justify-center px-3 py-2 rounded-md text-base text-red-700 bg-red-100 dark:bg-red-900 hover:bg-red-200 dark:hover:bg-red-800"
                 onClick={() => {
                   handleLogout();
                   setIsMobileMenuOpen(false);
