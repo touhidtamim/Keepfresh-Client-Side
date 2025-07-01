@@ -10,7 +10,7 @@ import NearlyExpiryItems from "./NearlyExpiryItems";
 const Home = () => {
   return (
     <div>
-      <HeroHighlights />
+      {/* <HeroHighlights /> */}
       <HeroSlider />
       <NearlyExpiryItems />
       <ExpiredItems />
