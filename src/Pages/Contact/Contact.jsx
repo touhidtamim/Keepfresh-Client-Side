@@ -5,7 +5,7 @@ import ContactMethods from "./ContactMethods";
 
 const ContactPage = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-gray-900">
       <ContactHero />
       <ContactMethods />
       <ContactForm />

@@ -13,7 +13,7 @@ const MissionStatement = () => {
   }, [controls, inView]);
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#f9fbfc] to-[#eef2f5]">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-sky-50 dark:bg-gray-900 ">
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 20 }}
@@ -21,18 +21,21 @@ const MissionStatement = () => {
         transition={{ duration: 0.6 }}
         className="max-w-4xl mx-auto text-center"
       >
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6">
-          Our <span className="text-sky-600">Mission</span>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">
+          Our <span className="text-sky-600 dark:text-sky-400">Mission</span>
         </h2>
-        <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-          We built <span className="font-semibold text-sky-600">KeepFresh</span>{" "}
+        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+          We built{" "}
+          <span className="font-semibold text-sky-600 dark:text-sky-400">
+            KeepFresh
+          </span>{" "}
           because we believe every bite counts. After seeing our own
           refrigerators waste food while others go hungry, we created a solution
           that helps households reduce food waste effortlessly. Our mission is
           to make sustainable food management accessible to everyone, one
           kitchen at a time.
         </p>
-        <div className="w-24 h-1 bg-sky-400 mx-auto rounded-full"></div>
+        <div className="w-24 h-1 bg-sky-400 dark:bg-sky-500 mx-auto rounded-full"></div>
       </motion.div>
     </section>
   );

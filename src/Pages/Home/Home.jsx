@@ -1,22 +1,24 @@
 import React from "react";
-import BlogPreviewCard from "./BlogPreviewCard";
+import BlogPreview from "./BlogPreview";
 import HowItWorks from "./../../Components/HowItWorks/HowItWorks";
-import BMIPreviewCard from "./BMIPreviewCard";
 import ExpiredItems from "./ExpiredItems";
 import NearlyExpiryItems from "./NearlyExpiryItems";
 import Carousel from "../../Components/Slider/Carousel";
+import ImpactHighlights from "./ImpactHighlights";
+import ResourceCenter from "./ResourceCenter";
 
 const Home = () => {
   return (
     <div>
-      {/* <HeroHighlights /> */}
       <Carousel />
 
       <NearlyExpiryItems />
       <ExpiredItems />
-      <BlogPreviewCard />
-      <HowItWorks />
-      <BMIPreviewCard />
+
+      <BlogPreview />
+      {/* <HowItWorks />
+      <ImpactHighlights />
+      <ResourceCenter /> */}
     </div>
   );
 };

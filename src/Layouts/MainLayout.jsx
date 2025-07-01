@@ -16,7 +16,7 @@ const MainLayout = () => {
       <ToastContainer />
       {navigation.state === "loading" && <Spinner />}
 
-      <div className="bg-[#f9fbfc] min-h-[90vh]">
+      <div className="bg-[#f9fbfc] dark:bg-gray-900 min-h-[90vh]">
         <Outlet />
       </div>
 

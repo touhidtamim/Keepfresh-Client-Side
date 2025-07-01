@@ -79,7 +79,7 @@ const ContactMethods = () => {
   }, [controls, inView]);
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 20 }}
@@ -87,8 +87,9 @@ const ContactMethods = () => {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="max-w-6xl mx-auto"
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-12 text-center">
-          Contact <span className="text-sky-600">Options</span>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
+          Contact{" "}
+          <span className="text-sky-600 dark:text-sky-400">Options</span>
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {methods.map((method, index) => (
@@ -96,15 +97,17 @@ const ContactMethods = () => {
               key={index}
               href={method.action}
               whileHover={{ y: -5 }}
-              className="bg-sky-50 hover:bg-sky-100 p-6 rounded-xl border border-sky-200 transition-colors duration-300 text-center"
+              className="bg-sky-50 dark:bg-gray-800 hover:bg-sky-100 dark:hover:bg-gray-700 p-6 rounded-xl border border-sky-200 dark:border-gray-700 transition-colors duration-300 text-center"
             >
-              <div className="text-sky-600 mb-4 flex justify-center">
+              <div className="text-sky-600 dark:text-sky-400 mb-4 flex justify-center">
                 {method.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">
                 {method.title}
               </h3>
-              <p className="text-gray-600">{method.details}</p>
+              <p className="text-gray-600 dark:text-gray-400">
+                {method.details}
+              </p>
             </motion.a>
           ))}
         </div>

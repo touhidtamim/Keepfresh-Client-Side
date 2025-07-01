@@ -28,13 +28,15 @@ const FAQItem = ({ faq, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
       viewport={{ once: true, margin: "-50px" }}
-      className="border-b border-gray-200 py-4"
+      className="border-b border-gray-200 dark:border-gray-700 py-4"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex justify-between items-center w-full text-left focus:outline-none"
       >
-        <h3 className="text-lg font-medium text-gray-900">{faq.question}</h3>
+        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+          {faq.question}
+        </h3>
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           className="ml-4 text-sky-600"
@@ -62,7 +64,7 @@ const FAQItem = ({ faq, index }) => {
           transition={{ duration: 0.2 }}
           className="mt-2"
         >
-          <p className="text-gray-600">{faq.answer}</p>
+          <p className="text-gray-600 dark:text-gray-300">{faq.answer}</p>
         </motion.div>
       )}
     </motion.div>
@@ -76,11 +78,12 @@ const ContactFAQ = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.2 }}
       viewport={{ once: true, margin: "-100px" }}
-      className="py-16 px-4 sm:px-6 lg:px-8 bg-white"
+      className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900"
     >
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
-          Frequently Asked <span className="text-sky-600">Questions</span>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+          Frequently Asked{" "}
+          <span className="text-sky-600 dark:text-sky-400">Questions</span>
         </h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
