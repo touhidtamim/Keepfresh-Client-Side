@@ -17,8 +17,8 @@ const Home = () => {
 
       <BlogPreview />
       <HowItWorks />
-      {/* <ImpactHighlights />
-      <ResourceCenter /> */}
+      <ImpactHighlights />
+      {/* <ResourceCenter /> */}
     </div>
   );
 };
