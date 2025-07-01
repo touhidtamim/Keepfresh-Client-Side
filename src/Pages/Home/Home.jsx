@@ -16,8 +16,8 @@ const Home = () => {
       <ExpiredItems />
 
       <BlogPreview />
-      {/* <HowItWorks />
-      <ImpactHighlights />
+      <HowItWorks />
+      {/* <ImpactHighlights />
       <ResourceCenter /> */}
     </div>
   );
