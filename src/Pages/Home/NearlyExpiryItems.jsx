@@ -275,7 +275,7 @@ const NearlyExpiryItems = () => {
               <button
                 onClick={prevPage}
                 disabled={currentPage === 1}
-                className="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 transition-colors flex items-center"
+                className="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-white disabled:opacity-50 transition-colors flex items-center"
               >
                 <svg
                   className="w-4 h-4 mr-1"
@@ -355,7 +355,7 @@ const NearlyExpiryItems = () => {
               <button
                 onClick={nextPage}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 transition-colors flex items-center"
+                className="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-white disabled:opacity-50 transition-colors flex items-center"
               >
                 Next
                 <svg

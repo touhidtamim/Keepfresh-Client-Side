@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import {
+  FiX,
+  FiEdit,
+  FiCalendar,
+  FiPackage,
+  FiImage,
+  FiAlignLeft,
+} from "react-icons/fi";
 
 const UpdateModal = ({
   item,
@@ -32,7 +40,7 @@ const UpdateModal = ({
     if (!formData.title.trim()) return "Title is required";
     if (!formData.category.trim()) return "Category is required";
     if (!formData.quantity || formData.quantity <= 0)
-      return "Quantity must be > 0";
+      return "Quantity must be greater than 0";
     if (!formData.expiryDate) return "Expiry date is required";
     if (new Date(formData.expiryDate) < new Date().setHours(0, 0, 0, 0))
       return "Expiry date cannot be in the past";
@@ -73,95 +81,249 @@ const UpdateModal = ({
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center"
+      className="fixed inset-0 flex items-center justify-center z-50 p-4"
       style={{ backdropFilter: "blur(6px)" }}
     >
-      <div className="bg-white rounded p-6 max-w-md w-full shadow-lg relative">
-        <h3 className="text-xl font-semibold mb-4">Update Food Item</h3>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="title"
-            placeholder="Food Title"
-            value={formData.title}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded"
-            disabled={modalLoading}
-          />
-          <input
-            type="text"
-            name="image"
-            placeholder="Image URL"
-            value={formData.image}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded"
-            disabled={modalLoading}
-          />
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded"
-            disabled={modalLoading}
-          >
-            <option value="">Select Category</option>
-            <option value="Dairy">Dairy</option>
-            <option value="Meat">Meat</option>
-            <option value="Vegetables">Vegetables</option>
-            <option value="Snacks">Snacks</option>
-            <option value="Others">Others</option>
-          </select>
-          <input
-            type="number"
-            name="quantity"
-            min="1"
-            value={formData.quantity}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded"
-            disabled={modalLoading}
-          />
-          <input
-            type="date"
-            name="expiryDate"
-            value={formData.expiryDate}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded"
-            disabled={modalLoading}
-          />
-          <textarea
-            name="description"
-            placeholder="Description (Optional)"
-            value={formData.description}
-            onChange={handleChange}
-            rows="3"
-            className="w-full border border-gray-300 p-2 rounded"
-            disabled={modalLoading}
-          ></textarea>
+      {/* Mobile: Card layout (single column) */}
+      <div className="md:hidden w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-xl">
+        <div className="bg-indigo-600 dark:bg-indigo-800 p-4 rounded-t-xl flex justify-between items-center">
+          <h3 className="text-xl font-semibold text-white">Update Item</h3>
+          <button onClick={onClose} className="text-white">
+            <FiX size={24} />
+          </button>
+        </div>
+
+        <div className="p-4 space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <FiEdit className="inline mr-2" /> Title *
+            </label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg dark:bg-gray-700"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <FiImage className="inline mr-2" /> Image URL
+            </label>
+            <input
+              type="text"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg dark:bg-gray-700"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <FiPackage className="inline mr-2" /> Category *
+            </label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg dark:bg-gray-700"
+            >
+              <option value="">Select Category</option>
+              <option value="Dairy">Dairy</option>
+              <option value="Meat">Meat</option>
+              <option value="Vegetables">Vegetables</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Quantity *
+            </label>
+            <input
+              type="number"
+              name="quantity"
+              min="1"
+              value={formData.quantity}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg dark:bg-gray-700"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <FiCalendar className="inline mr-2" /> Expiry Date *
+            </label>
+            <input
+              type="date"
+              name="expiryDate"
+              value={formData.expiryDate}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg dark:bg-gray-700"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <FiAlignLeft className="inline mr-2" /> Description
+            </label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              rows="3"
+              className="w-full p-2 border rounded-lg dark:bg-gray-700"
+            ></textarea>
+          </div>
 
           {modalError && (
-            <p className="text-red-600 font-medium">{modalError}</p>
+            <p className="text-red-500 dark:text-red-400">{modalError}</p>
           )}
 
-          <div className="flex justify-end space-x-2">
+          <div className="flex space-x-2 justify-end">
             <button
-              type="button"
               onClick={onClose}
-              className="px-4 py-2  rounded bg-gray-300 hover:bg-gray-400 cursor-pointer"
-              disabled={modalLoading}
+              className="px-4 py-2 bg-gray-200 dark:bg-gray-600 rounded-lg"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className={`px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 cursor-pointer ${
-                modalLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              disabled={modalLoading}
+              onClick={handleSubmit}
+              className="px-4 py-2 bg-indigo-600 text-white rounded-lg"
             >
               {modalLoading ? "Updating..." : "Update"}
             </button>
           </div>
-        </form>
+        </div>
+      </div>
+
+      {/* Desktop/Tablet: 2-column layout */}
+      <div className="hidden md:block w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl shadow-xl">
+        <div className="bg-indigo-600 dark:bg-indigo-800 p-4 rounded-t-xl flex justify-between items-center">
+          <h3 className="text-xl font-semibold text-white">Update Food Item</h3>
+          <button onClick={onClose} className="text-white">
+            <FiX size={24} />
+          </button>
+        </div>
+
+        <div className="p-6">
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Column 1 */}
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <FiEdit className="inline mr-2" /> Title *
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <FiImage className="inline mr-2" /> Image URL
+                  </label>
+                  <input
+                    type="text"
+                    name="image"
+                    value={formData.image}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <FiPackage className="inline mr-2" /> Category *
+                  </label>
+                  <select
+                    name="category"
+                    value={formData.category}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-white"
+                  >
+                    <option value="">Select Category</option>
+                    <option value="Dairy">Dairy</option>
+                    <option value="Meat">Meat</option>
+                    <option value="Vegetables">Vegetables</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Column 2 */}
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Quantity *
+                  </label>
+                  <input
+                    type="number"
+                    name="quantity"
+                    min="1"
+                    value={formData.quantity}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <FiCalendar className="inline mr-2" /> Expiry Date *
+                  </label>
+                  <input
+                    type="date"
+                    name="expiryDate"
+                    value={formData.expiryDate}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <FiAlignLeft className="inline mr-2" /> Description
+                  </label>
+                  <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    rows="5"
+                    className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-white"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            {modalError && (
+              <p className="text-red-500 dark:text-red-400 mt-4">
+                {modalError}
+              </p>
+            )}
+
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 bg-gray-200 dark:bg-gray-600 rounded-lg"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+              >
+                {modalLoading ? "Updating..." : "Update Item"}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -91,12 +91,12 @@ const OverviewPage = () => {
                 "https://i.postimg.cc/0QTwptyd/png-transparent-default-avatar-thumbnail.png"
               }
               alt={user?.displayName || "User"}
-              className="w-24 h-24 rounded-full object-cover border-4 border-teal-100 dark:border-teal-900"
+              className="w-24 h-24 rounded-full object-cover border-4 border-blue-100 dark:border-blue-900"
               onError={(e) => {
                 e.target.src = "https://i.ibb.co/5GzXkwq/user.png";
               }}
             />
-            <div className="absolute bottom-0 right-0 bg-teal-500 rounded-full p-1">
+            <div className="absolute bottom-0 right-0 bg-blue-500 rounded-full p-1">
               <FaRegSmile className="text-white text-lg" />
             </div>
           </div>
@@ -149,7 +149,7 @@ const OverviewPage = () => {
             </div>
             <p
               className={`text-sm mt-3 ${
-                stat.trend === "up" ? "text-green-500" : "text-red-500"
+                stat.trend === "up" ? "text-blue-500" : "text-red-500"
               }`}
             >
               {stat.change} {stat.trend === "up" ? "↑" : "↓"} from last week
@@ -185,8 +185,8 @@ const OverviewPage = () => {
                 key={activity.id}
                 className="flex items-start pb-4 border-b border-gray-100 dark:border-gray-700 last:border-0 last:pb-0"
               >
-                <div className="bg-teal-100 dark:bg-teal-900 rounded-full p-2 mr-3 mt-1">
-                  <FiCalendar className="text-teal-600 dark:text-teal-400" />
+                <div className="bg-blue-100 dark:bg-blue-900 rounded-full p-2 mr-3 mt-1">
+                  <FiCalendar className="text-blue-600 dark:text-blue-400" />
                 </div>
                 <div className="flex-1">
                   <p className="text-gray-800 dark:text-white">

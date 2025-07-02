@@ -101,14 +101,14 @@ const Carousel = () => {
       {/* Arrows */}
       <button
         onClick={() => slide(-1)}
-        className="hidden sm:flex absolute left-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow hover:scale-105 transition z-10"
+        className="hidden cursor-pointer sm:flex absolute left-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow hover:scale-105 transition z-10"
         aria-label="Prev"
       >
         <FiChevronLeft size={24} className="text-black dark:text-white" />
       </button>
       <button
         onClick={() => slide(1)}
-        className="hidden sm:flex absolute right-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow hover:scale-105 transition z-10"
+        className="hidden cursor-pointer sm:flex absolute right-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow hover:scale-105 transition z-10"
         aria-label="Next"
       >
         <FiChevronRight size={24} className="text-black dark:text-white" />
@@ -179,7 +179,7 @@ const Carousel = () => {
                 animate="visible"
                 custom={5}
                 whileHover={{ scale: 1.05 }}
-                className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition"
+                className="bg-blue-600 cursor-pointer hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition"
               >
                 {slides[current].cta}
               </motion.button>
@@ -222,7 +222,7 @@ const Carousel = () => {
               setDir(i > current ? 1 : -1);
               setCurrent(i);
             }}
-            className={`w-3 h-3 rounded-full transition-all ${
+            className={`w-3 h-3 cursor-pointer rounded-full transition-all ${
               i === current
                 ? "bg-black dark:bg-white w-6"
                 : "bg-gray-400 dark:bg-gray-600 hover:bg-gray-600"

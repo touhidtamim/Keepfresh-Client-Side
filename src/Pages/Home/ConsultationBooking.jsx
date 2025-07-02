@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { FiCalendar } from "react-icons/fi";
 
 const specialists = [
   {
@@ -30,12 +34,42 @@ const specialists = [
 ];
 
 const ConsultationBooking = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleBooking = (specialistName, bookingLink) => {
+    if (user) {
+      Swal.fire({
+        title: "Booking Request Sent!",
+        html: `Our team will contact you shortly to schedule your session with <b>${specialistName}</b>.`,
+        icon: "success",
+        confirmButtonText: "Got it!",
+        confirmButtonColor: "#0284c7",
+      });
+    } else {
+      Swal.fire({
+        title: "Login Required",
+        text: "You need to login to book a consultation session.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Login Now",
+        confirmButtonColor: "#0284c7",
+        cancelButtonText: "Cancel",
+        cancelButtonColor: "#ef4444",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto text-center mb-14 px-4 sm:px-0">
+      <div className="max-w-7xl mx-auto text-center mb-14">
         <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white">
           Book a Session with Our{" "}
-          <span className="text-sky-600">Specialists</span>
+          <span className="text-sky-600 dark:text-sky-400">Specialists</span>
         </h2>
         <p className="mt-4 max-w-3xl mx-auto text-gray-600 dark:text-gray-400 text-base sm:text-lg leading-relaxed">
           Get personalized guidance on nutrition, wellness, and food safety by
@@ -43,11 +77,11 @@ const ConsultationBooking = () => {
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4 sm:px-0">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {specialists.map(({ name, specialty, image, bookingLink }, index) => (
           <div
             key={index}
-            className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md overflow-hidden flex flex-col"
+            className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow duration-300"
           >
             <img
               src={image}
@@ -59,14 +93,17 @@ const ConsultationBooking = () => {
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
                 {name}
               </h3>
-              <p className="text-sky-600 font-medium mb-4">{specialty}</p>
-              <a
-                href={bookingLink}
-                className="mt-auto inline-block text-center bg-sky-600 hover:bg-sky-700 text-white px-6 py-3 rounded-full font-semibold shadow-md transition duration-300"
+              <p className="text-sky-600 dark:text-sky-400 font-medium mb-4">
+                {specialty}
+              </p>
+              <button
+                onClick={() => handleBooking(name, bookingLink)}
+                className="mt-auto cursor-pointer inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 dark:bg-sky-700 dark:hover:bg-sky-800 text-white px-6 py-3 rounded-full font-semibold shadow-md transition duration-300"
                 aria-label={`Book a session with ${name}`}
               >
+                <FiCalendar className="text-xl" />
                 Book Session
-              </a>
+              </button>
             </div>
           </div>
         ))}

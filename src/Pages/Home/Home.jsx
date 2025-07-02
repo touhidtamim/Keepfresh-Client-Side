@@ -12,10 +12,8 @@ const Home = () => {
   return (
     <div>
       <Carousel />
-
       <NearlyExpiryItems />
       <ExpiredItems />
-
       <BlogPreview />
       <HowItWorks />
       <ImpactHighlights />

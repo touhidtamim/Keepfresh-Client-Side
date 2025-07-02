@@ -17,7 +17,7 @@ const DashboardLayout = () => {
             className={({ isActive }) =>
               `px-4 py-2 rounded-md transition flex items-center ${
                 isActive
-                  ? "bg-teal-50 dark:bg-teal-900 text-teal-600 dark:text-teal-400 font-semibold"
+                  ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 font-semibold"
                   : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`
             }
@@ -43,7 +43,7 @@ const DashboardLayout = () => {
             className={({ isActive }) =>
               `px-4 py-2 rounded-md transition flex items-center ${
                 isActive
-                  ? "bg-teal-50 dark:bg-teal-900 text-teal-600 dark:text-teal-400 font-semibold"
+                  ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 font-semibold"
                   : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`
             }
@@ -69,7 +69,7 @@ const DashboardLayout = () => {
             className={({ isActive }) =>
               `px-4 py-2 rounded-md transition flex items-center ${
                 isActive
-                  ? "bg-teal-50 dark:bg-teal-900 text-teal-600 dark:text-teal-400 font-semibold"
+                  ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 font-semibold"
                   : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`
             }
@@ -95,7 +95,7 @@ const DashboardLayout = () => {
             className={({ isActive }) =>
               `px-4 py-2 rounded-md transition flex items-center ${
                 isActive
-                  ? "bg-teal-50 dark:bg-teal-900 text-teal-600 dark:text-teal-400 font-semibold"
+                  ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 font-semibold"
                   : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`
             }
@@ -121,7 +121,7 @@ const DashboardLayout = () => {
             className={({ isActive }) =>
               `px-4 py-2 rounded-md transition flex items-center ${
                 isActive
-                  ? "bg-teal-50 dark:bg-teal-900 text-teal-600 dark:text-teal-400 font-semibold"
+                  ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 font-semibold"
                   : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`
             }
@@ -140,6 +140,32 @@ const DashboardLayout = () => {
               />
             </svg>
             Expired Items
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/bmi-calculation"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-md transition flex items-center ${
+                isActive
+                  ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 font-semibold"
+                  : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+              }`
+            }
+          >
+            <svg
+              className="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12l2 2 4-4m-4-6a9 9 0 100 18 9 9 0 000-18z"
+              />
+            </svg>
+            BMI Checker
           </NavLink>
         </nav>
       </aside>

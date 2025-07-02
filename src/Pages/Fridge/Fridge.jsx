@@ -14,7 +14,7 @@ const Fridge = () => {
         message="Want to review your expired food items?"
         subMessage="Go to your dashboard to see what's no longer fresh."
         linkText="Check Expired"
-        linkTo="/dashboard"
+        linkTo="/dashboard/expired-items"
       />
     </>
   );

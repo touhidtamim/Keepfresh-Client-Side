@@ -12,7 +12,6 @@ import NotFoundPage from "../Components/NotFound";
 import PrivacyPolicy from "../Pages/Legal/PrivacyPolicy";
 import FAQ from "../Components/FAQ";
 import TermsAndConditions from "../Pages/Legal/TermsAndConditions";
-import Notification from "../Pages/Notification/Notification";
 import PrivateRouter from "./PrivateRouter";
 import FoodDetails from "../Pages/FoodDetails/FoodDetails";
 
@@ -23,6 +22,9 @@ import ExpiredItems from "../Pages/Home/ExpiredItems";
 import ProfileCard from "../Pages/Dashboard/ProfileCard";
 import AddFood from "../Pages/AddFood/AddFood";
 import MyItems from "../Pages/MyItems/MyItems";
+import ExpiryTable from "../Pages/Dashboard/ExpiryTable";
+import BMICalculator from "../Pages/Dashboard/BMICalculator";
+import NotificationAlert from "../Pages/Notification/NotificationAlert";
 
 const router = createBrowserRouter([
   {
@@ -37,13 +39,13 @@ const router = createBrowserRouter([
         path: "/notifications",
         element: (
           <PrivateRouter>
-            <Notification />
+            <NotificationAlert />
           </PrivateRouter>
         ),
       },
       { path: "/blog", element: <Blog /> },
 
-      // ✅ Dashboard with children
+      //  Dashboard with children
       {
         path: "/dashboard",
         element: (
@@ -56,7 +58,8 @@ const router = createBrowserRouter([
           { path: "my-profile", element: <ProfileCard /> },
           { path: "add-foods", element: <AddFood /> },
           { path: "my-foods", element: <MyItems /> },
-          { path: "expired-items", element: <ExpiredItems /> },
+          { path: "expired-items", element: <ExpiryTable /> },
+          { path: "bmi-calculation", element: <BMICalculator /> },
           { path: "*", element: <NotFoundPage /> },
         ],
       },
