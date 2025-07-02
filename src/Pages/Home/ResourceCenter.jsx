@@ -1,5 +1,11 @@
 import { motion } from "framer-motion";
-import { FiDownload } from "react-icons/fi";
+import {
+  FiPackage,
+  FiFileText,
+  FiClipboard,
+  FiVideo,
+  FiDownload,
+} from "react-icons/fi";
 
 const resources = [
   {
@@ -7,28 +13,32 @@ const resources = [
     description:
       "Download our printable PDF guide to learn how to store your food smartly.",
     link: "/resources/storage-guide.pdf",
-    image: "https://i.postimg.cc/zvhDYpc6/storage-guide.jpg",
+    icon: <FiPackage className="text-sky-600" />,
+    fileType: "PDF",
   },
   {
     title: "Waste Tracking Template",
     description:
       "Use our weekly tracker to measure and minimize your food waste.",
     link: "/resources/waste-tracker.xlsx",
-    image: "https://i.postimg.cc/8P2tRTpP/waste-tracker.jpg",
+    icon: <FiFileText className="text-sky-600" />,
+    fileType: "XLSX",
   },
   {
     title: "Meal Planning Toolkit",
     description:
       "Plan your meals efficiently and save money with our free toolkit.",
     link: "/resources/meal-planner.pdf",
-    image: "https://i.postimg.cc/Y2F2dK4n/meal-planner.jpg",
+    icon: <FiClipboard className="text-sky-600" />,
+    fileType: "PDF",
   },
   {
     title: "App Walkthrough Video",
     description:
       "A step-by-step video tutorial to help you get started with KeepFresh.",
     link: "/resources/app-video.mp4",
-    image: "https://i.postimg.cc/3wGyCpxp/app-walkthrough.jpg",
+    icon: <FiVideo className="text-sky-600" />,
+    fileType: "MP4",
   },
 ];
 
@@ -50,16 +60,32 @@ const ResourceCenter = () => {
             key={index}
             href={item.link}
             whileHover={{ scale: 1.02 }}
-            className="block bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg text-left p-6 flex flex-col"
+            className="group block bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg text-left p-6 flex flex-col relative"
             download
           >
-            <h3 className="flex items-center text-lg font-bold text-gray-800 dark:text-white mb-3">
-              <FiDownload className="mr-2 text-sky-600" />
-              {item.title}
-            </h3>
+            {/* Top Icon Row */}
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2 text-lg font-bold text-gray-800 dark:text-white">
+                {item.icon}
+                {item.title}
+              </div>
+
+              {/* Download Badge */}
+              <span className="flex items-center gap-1 bg-sky-100 dark:bg-sky-700 text-sky-600 dark:text-white text-xs font-medium px-2 py-1 rounded-full">
+                <FiDownload size={14} />
+                {item.fileType}
+              </span>
+            </div>
+
+            {/* Description */}
             <p className="text-gray-600 dark:text-gray-300 text-sm flex-grow leading-snug">
               {item.description}
             </p>
+
+            {/* Hover Label */}
+            <span className="absolute bottom-3 right-4 text-xs text-gray-400 dark:text-gray-500 group-hover:text-sky-500 transition">
+              Click to download
+            </span>
           </motion.a>
         ))}
       </div>

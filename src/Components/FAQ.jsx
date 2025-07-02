@@ -63,17 +63,17 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-white to-[#f1f6fa] py-16 px-4 sm:px-6 lg:px-8">
+    <section className="bg-gradient-to-b from-white to-[#f1f6fa] dark:from-gray-900 dark:to-gray-950 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto text-center mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="text-4xl font-extrabold text-gray-900 mb-4"
+          className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4"
         >
           Frequently Asked <span className="text-sky-600">Questions</span>
         </motion.h2>
-        <p className="text-gray-600 text-base md:text-lg">
+        <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg">
           Everything you need to know about using KeepFresh smartly and safely.
         </p>
       </div>
@@ -85,11 +85,11 @@ const FAQSection = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, delay: index * 0.1 }}
-            className="bg-white border border-gray-200 rounded-xl shadow-sm"
+            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm"
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full px-6 py-5 flex items-center justify-between text-left text-gray-800 font-medium text-lg"
+              className="w-full px-6 py-5 flex items-center justify-between text-left text-gray-800 dark:text-white font-medium text-lg"
             >
               {faq.question}
               {openIndex === index ? (
@@ -99,7 +99,7 @@ const FAQSection = () => {
               )}
             </button>
             {openIndex === index && (
-              <div className="px-6 pb-5 text-gray-600 text-sm md:text-base">
+              <div className="px-6 pb-5 text-gray-600 dark:text-gray-300 text-sm md:text-base leading-relaxed">
                 {faq.answer}
               </div>
             )}

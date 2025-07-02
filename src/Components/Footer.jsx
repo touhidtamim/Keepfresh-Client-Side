@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Github, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-gray-300 border-t border-gray-800  ">
+    <footer className="bg-black dark:bg-gray-800 text-gray-300 dark:text-gray-300 border-t border-gray-800 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Logo & Description */}
         <div className="space-y-4">
@@ -14,7 +14,7 @@ const Footer = () => {
               className="h-12 md:h-14 transition-transform group-hover:scale-105"
             />
           </Link>
-          <p className="text-sm leading-relaxed text-gray-400 dark:text-gray-300">
+          <p className="text-sm leading-relaxed text-gray-400 dark:text-gray-400">
             Every meal matters. KeepFresh helps you save food, time, and the
             planet — one item at a time.
           </p>
@@ -86,7 +86,7 @@ const Footer = () => {
             <h3 className="text-lg font-bold text-[#7adce6] dark:text-[#9ee5ec]">
               Stay Updated
             </h3>
-            <p className="text-sm text-gray-400 dark:text-gray-300">
+            <p className="text-sm text-gray-400 dark:text-gray-400">
               Subscribe to our newsletter for the latest updates.
             </p>
             <form className="flex flex-col sm:flex-row gap-3">
@@ -137,7 +137,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="text-center text-sm text-gray-500 pb-5  bg-black/50  ">
+      <div className="text-center text-sm text-gray-500 dark:text-gray-400 pb-5 bg-black/50 dark:bg-gray-800/50">
         &copy; {new Date().getFullYear()} KeepFresh. All rights reserved.
       </div>
     </footer>

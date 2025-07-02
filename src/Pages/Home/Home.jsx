@@ -6,6 +6,7 @@ import NearlyExpiryItems from "./NearlyExpiryItems";
 import Carousel from "../../Components/Slider/Carousel";
 import ImpactHighlights from "./ImpactHighlights";
 import ResourceCenter from "./ResourceCenter";
+import ConsultationBooking from "./ConsultationBooking";
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
       <HowItWorks />
       <ImpactHighlights />
       <ResourceCenter />
+      <ConsultationBooking />
     </div>
   );
 };
