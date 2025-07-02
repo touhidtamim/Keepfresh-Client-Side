@@ -61,7 +61,7 @@ const LogIn = () => {
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
       await showSuccessAlert("Login Successful!");
       clearForm();
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       let message = "Something went wrong, please try again.";
       if (error.code === "auth/user-not-found") {
@@ -90,7 +90,7 @@ const LogIn = () => {
       await signInWithPopup(auth, provider);
       await showSuccessAlert("Google Login Successful!");
       clearForm();
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       let message = "Google login failed. Please try again.";
       if (error.code === "auth/popup-closed-by-user") {

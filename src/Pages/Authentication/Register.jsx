@@ -85,8 +85,8 @@ const Register = () => {
       // Clear form
       setFormData({ name: "", email: "", photoURL: "", password: "" });
 
-      // Redirect to home
-      navigate("/");
+      // Redirect to dashboard
+      navigate("/dashboard");
     } catch (error) {
       MySwal.fire({
         icon: "error",
@@ -115,7 +115,7 @@ const Register = () => {
       });
 
       setFormData({ name: "", email: "", photoURL: "", password: "" });
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       MySwal.fire({
         icon: "error",
