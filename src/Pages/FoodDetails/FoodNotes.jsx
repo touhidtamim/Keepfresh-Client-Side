@@ -33,22 +33,26 @@ const FoodNotes = ({ isOwner, note, onNoteAddOrUpdate, onNoteDelete }) => {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-semibold text-gray-900">Your Note</h3>
+      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+        Your Note
+      </h3>
 
       {note?.text && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-blue-50 p-4 rounded border border-blue-200 relative"
+          className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded border border-blue-200 dark:border-blue-700 relative"
         >
-          <p className="text-gray-800 whitespace-pre-wrap">{note.text}</p>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
+            {note.text}
+          </p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
             Posted on: {new Date(note.createdAt).toLocaleString()}
           </p>
           {isOwner && (
             <button
               onClick={handleDelete}
-              className="absolute top-2 right-2 text-red-600 hover:text-red-800 font-bold"
+              className="absolute top-2 right-2 text-red-600 hover:text-red-800 dark:hover:text-red-400 font-bold"
               title="Delete Note"
               aria-label="Delete Note"
             >
@@ -68,13 +72,13 @@ const FoodNotes = ({ isOwner, note, onNoteAddOrUpdate, onNoteDelete }) => {
             : "Only the owner can add a note"
         }
         disabled={!isOwner}
-        className={`w-full rounded p-3 focus:outline-none transition-all
+        className={`w-full rounded p-3 focus:outline-none transition-all resize-none
           ${
             isOwner
               ? inputEmpty
-                ? "border border-gray-300 bg-white placeholder-gray-400 focus:ring-2 focus:ring-blue-300"
-                : "border border-blue-500 bg-white placeholder-gray-600 focus:ring-2 focus:ring-blue-500"
-              : "border border-gray-200 bg-gray-100 placeholder-gray-400 cursor-not-allowed"
+                ? "border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-300"
+                : "border border-blue-500 dark:border-blue-500 bg-white dark:bg-gray-800 placeholder-gray-600 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+              : "border border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
           }
         `}
       />
@@ -88,7 +92,7 @@ const FoodNotes = ({ isOwner, note, onNoteAddOrUpdate, onNoteDelete }) => {
           ${
             isOwner && !inputEmpty
               ? "bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/50"
-              : "bg-gray-400 cursor-not-allowed opacity-70"
+              : "bg-gray-400 dark:bg-gray-600 cursor-not-allowed opacity-70"
           }
         `}
       >

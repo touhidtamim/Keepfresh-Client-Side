@@ -117,28 +117,34 @@ const FoodDetails = () => {
   };
 
   if (loading)
-    return <div className="text-center mt-10 text-xl">Loading...</div>;
+    return (
+      <div className="text-center mt-10 text-xl text-gray-700 dark:text-gray-200">
+        Loading...
+      </div>
+    );
 
   if (error)
     return (
-      <div className="text-center text-red-600 mt-10 text-xl">{error}</div>
+      <div className="text-center text-red-600 dark:text-red-400 mt-10 text-xl">
+        {error}
+      </div>
     );
 
   if (!item)
     return (
-      <div className="text-center text-red-600 mt-10 text-xl">
+      <div className="text-center text-red-600 dark:text-red-400 mt-10 text-xl">
         Item not found.
       </div>
     );
 
   return (
-    <div className="md:pb-20">
+    <div className="md:pb-20 bg-white dark:bg-gray-900">
       <FoodDetailsIntro />
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-md mt-10 space-y-8"
+        className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md mt-10 space-y-8"
       >
         <FoodImageExpiry
           foodImage={item.image}
