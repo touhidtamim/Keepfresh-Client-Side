@@ -10,7 +10,7 @@ const Blog = () => {
         message="Ready to take action?"
         subMessage="Use what you learned — start tracking your food now."
         linkText="Add Your Food"
-        linkTo="/add-food"
+        linkTo="/dashboard/add-foods"
       />
     </div>
   );

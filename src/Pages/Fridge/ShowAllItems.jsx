@@ -154,8 +154,8 @@ const ShowAllItems = () => {
             <option value="Dairy">Dairy</option>
             <option value="Meat">Meat</option>
             <option value="Vegetable">Vegetable</option>
-            <option value="Fruit">Fruit</option>
-            <option value="Beverage">Beverage</option>
+            <option value="Fruits">Fruits</option>
+            <option value="Beverages">Beverages</option>
             <option value="Snacks">Snacks</option>
             <option value="Others">Others</option>
           </select>

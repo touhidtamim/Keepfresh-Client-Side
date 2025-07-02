@@ -52,8 +52,6 @@ const Navbar = () => {
   const loggedInLinks = [
     { name: "Home", path: "/" },
     { name: "Fridge", path: "/fridge" },
-    { name: "Add Food", path: "/add-food" },
-    { name: "My Items", path: "/my-items" },
     { name: "Blog", path: "/blog" },
     { name: "Dashboard", path: "/dashboard" },
   ];
@@ -165,7 +163,7 @@ const Navbar = () => {
 
                 {/* Avatar */}
                 <div className="relative group cursor-pointer">
-                  <HashLink to="/dashboard#profile" smooth>
+                  <HashLink to="/dashboard/my-profile" smooth>
                     <img
                       src={user.photoURL || defaultAvatar}
                       alt="User"

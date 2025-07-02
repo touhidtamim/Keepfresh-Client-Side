@@ -19,7 +19,7 @@ const JoinMovement = () => {
           Together, we're creating a community of conscious consumers who
           believe small daily actions can lead to big environmental change.
         </p>
-        <Link to="/add-food">
+        <Link to="/dashboard/add-foods">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
