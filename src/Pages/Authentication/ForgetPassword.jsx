@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
   return (
-    <div className="min-h-[80vh] bg-gradient-to-b from-[#f9fbfc] to-[#eef2f5] flex items-center justify-center p-4">
+    <div className="min-h-[80vh] bg-gradient-to-b from-[#f9fbfc] to-[#eef2f5] dark:from-gray-900 dark:to-gray-950 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -11,16 +11,16 @@ const ForgotPassword = () => {
         className="w-full max-w-md"
       >
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-extrabold text-gray-900 mb-2">
+          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">
             Reset your <span className="text-sky-600">password</span>
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             Enter your email to receive a password reset link
           </p>
         </div>
 
-        <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-          <div className="hidden mb-4 p-3 rounded-lg bg-green-100 text-green-700 text-sm">
+        <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md border border-gray-100 dark:border-gray-700">
+          <div className="hidden mb-4 p-3 rounded-lg bg-green-100 dark:bg-green-200 text-green-700 dark:text-green-800 text-sm">
             Password reset link has been sent to your email
           </div>
 
@@ -28,7 +28,7 @@ const ForgotPassword = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 Email address
               </label>
@@ -37,8 +37,8 @@ const ForgotPassword = () => {
                 name="email"
                 type="email"
                 autoComplete="email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-sky-500 focus:border-sky-500"
                 placeholder="your@email.com"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-lg focus:ring-sky-500 focus:border-sky-500"
               />
             </div>
 
@@ -63,7 +63,7 @@ const ForgotPassword = () => {
         </div>
 
         <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             Don't have an account?{" "}
             <Link
               to="/register"

@@ -6,7 +6,32 @@ const ExpiredItems = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const [itemsPerPage, setItemsPerPage] = useState(4); // Default to mobile view
+
+  // Set items per page based on screen size
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth >= 1280) {
+        // Desktop (xl)
+        setItemsPerPage(8); // 4x2 grid
+      } else if (window.innerWidth >= 768) {
+        // Tablet (lg)
+        setItemsPerPage(6); // 3x2 grid
+      } else {
+        // Mobile
+        setItemsPerPage(4); // 2x2 grid
+      }
+    };
+
+    // Set initial value
+    updateItemsPerPage();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", updateItemsPerPage);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
 
   useEffect(() => {
     fetch("https://keep-fresh-server-side.vercel.app/items")
@@ -40,8 +65,8 @@ const ExpiredItems = () => {
         className="flex justify-center items-center min-h-[300px]"
       >
         <div className="flex flex-col items-center">
-          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
-          <p className="text-gray-600 font-medium">
+          <div className="w-12 h-12 border-4 border-indigo-200 dark:border-indigo-700 border-t-indigo-600 dark:border-t-indigo-400 rounded-full animate-spin mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300 font-medium">
             Checking for expired items...
           </p>
         </div>
@@ -50,7 +75,7 @@ const ExpiredItems = () => {
   }
 
   return (
-    <section className="bg-gradient-to-b from-indigo-50 to-sky-50">
+    <section className="bg-gradient-to-b from-indigo-50 to-sky-50 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -60,17 +85,18 @@ const ExpiredItems = () => {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
-            <span className="text-red-600">Expired</span> Food Items
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-3">
+            <span className="text-red-600 dark:text-red-400">Expired</span> Food
+            Items
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
+          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
             These items have passed their expiry date. Consider discarding them
             safely.
           </p>
         </motion.div>
 
         {/* Items Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {currentItems.map((item) => (
             <motion.div
               key={item._id}
@@ -82,16 +108,16 @@ const ExpiredItems = () => {
               }}
               transition={{ type: "spring", stiffness: 300 }}
               viewport={{ once: true, margin: "0px 0px -50px 0px" }}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col transition-all duration-300 hover:border-red-100 relative"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col transition-all duration-300 hover:border-red-100 dark:hover:border-red-700 relative"
             >
               {/* Expired Badge */}
-              <div className="absolute top-4 right-4 bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md z-10">
+              <div className="absolute top-4 right-4 bg-red-600 dark:bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md z-10">
                 Expired
               </div>
 
               {/* Image */}
               <div className="relative h-52 w-full overflow-hidden">
-                <div className="absolute inset-0 bg-black/10 z-0"></div>
+                <div className="absolute inset-0 bg-black/10 dark:bg-black/30 z-0"></div>
                 <img
                   src={
                     item.image ||
@@ -104,7 +130,7 @@ const ExpiredItems = () => {
                       "https://i.postimg.cc/3xQgzDmK/800px-Image-not-available.png";
                   }}
                 />
-                <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-full text-xs font-semibold text-gray-700 shadow-sm">
+                <div className="absolute bottom-3 right-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur px-2 py-1 rounded-full text-xs font-semibold text-gray-700 dark:text-gray-300 shadow-sm">
                   {item.quantity || 1} {item.quantity > 1 ? "units" : "unit"}
                 </div>
               </div>
@@ -112,18 +138,18 @@ const ExpiredItems = () => {
               {/* Content */}
               <div className="p-5 flex-grow flex flex-col">
                 <div className="mb-4">
-                  <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
+                  <h3 className="text-lg font-bold text-gray-800 dark:text-white line-clamp-2">
                     {item.title || "Unnamed Item"}
                   </h3>
 
                   <div className="flex items-center justify-between mt-3 mb-4">
-                    <span className="bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">
+                    <span className="bg-indigo-100 dark:bg-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full">
                       {item.category || "General"}
                     </span>
 
-                    <div className="flex items-center text-sm">
+                    <div className="flex items-center text-sm text-red-600 dark:text-red-400">
                       <svg
-                        className="w-4 h-4 text-red-500 mr-1"
+                        className="w-4 h-4 mr-1"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -135,7 +161,7 @@ const ExpiredItems = () => {
                           d="M6 18L18 6M6 6l12 12"
                         />
                       </svg>
-                      <span className="font-medium text-red-600">
+                      <span className="font-medium">
                         {item.expiryDate
                           ? new Date(item.expiryDate).toLocaleDateString()
                           : "N/A"}
@@ -182,66 +208,114 @@ const ExpiredItems = () => {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="mt-12 flex justify-center items-center gap-2"
+            className="mt-12 flex flex-col sm:flex-row justify-center items-center gap-4"
           >
-            <button
-              onClick={prevPage}
-              disabled={currentPage === 1}
-              className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 transition-colors flex items-center"
-            >
-              <svg
-                className="w-4 h-4 mr-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              Previous
-            </button>
-
-            {[...Array(totalPages)].map((_, i) => (
+            <div className="flex items-center gap-2">
               <button
-                key={i}
-                onClick={() => goToPage(i + 1)}
-                className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                  currentPage === i + 1
-                    ? "bg-red-600 text-white shadow-md"
-                    : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                } transition-colors font-medium`}
+                onClick={prevPage}
+                disabled={currentPage === 1}
+                className="px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 transition-colors flex items-center"
               >
-                {i + 1}
+                <svg
+                  className="w-4 h-4 mr-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                Previous
               </button>
-            ))}
 
-            <button
-              onClick={nextPage}
-              disabled={currentPage === totalPages}
-              className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 disabled:opacity-50 transition-colors flex items-center"
-            >
-              Next
-              <svg
-                className="w-4 h-4 ml-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+              <div className="flex items-center gap-1">
+                {/* Always show first page */}
+                <button
+                  onClick={() => goToPage(1)}
+                  className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                    currentPage === 1
+                      ? "bg-red-600 text-white shadow-md"
+                      : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
+                  } transition-colors font-medium`}
+                >
+                  1
+                </button>
+
+                {/* Show ellipsis if current page is far from start */}
+                {currentPage > 3 && (
+                  <span className="px-1 text-gray-500">...</span>
+                )}
+
+                {/* Show pages around current page */}
+                {[currentPage - 1, currentPage, currentPage + 1]
+                  .filter((page) => page > 1 && page < totalPages)
+                  .map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => goToPage(page)}
+                      className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                        currentPage === page
+                          ? "bg-red-600 text-white shadow-md"
+                          : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
+                      } transition-colors font-medium`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+
+                {/* Show ellipsis if current page is far from end */}
+                {currentPage < totalPages - 2 && (
+                  <span className="px-1 text-gray-500">...</span>
+                )}
+
+                {/* Always show last page if there's more than one page */}
+                {totalPages > 1 && (
+                  <button
+                    onClick={() => goToPage(totalPages)}
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                      currentPage === totalPages
+                        ? "bg-red-600 text-white shadow-md"
+                        : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
+                    } transition-colors font-medium`}
+                  >
+                    {totalPages}
+                  </button>
+                )}
+              </div>
+
+              <button
+                onClick={nextPage}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 text-gray-700 dark:text-gray-300 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 transition-colors flex items-center"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
+                Next
+                <svg
+                  className="w-4 h-4 ml-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Page info */}
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              Page {currentPage} of {totalPages}
+            </div>
           </motion.div>
         )}
-      </div>{" "}
+      </div>
     </section>
   );
 };

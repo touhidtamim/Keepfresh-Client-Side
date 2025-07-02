@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { FiMenu, FiX, FiBell, FiLogOut } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider";
+import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { HashLink } from "react-router-hash-link";
 
