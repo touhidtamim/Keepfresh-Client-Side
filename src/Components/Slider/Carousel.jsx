@@ -21,7 +21,7 @@ const slides = [
       "Waste less, save more",
     ],
     cta: "Get Started Today",
-    icon: <FiCheck className="text-blue-600 dark:text-blue-400" size={24} />,
+    icon: <FiCheck className="text-blue-500" size={24} />,
     images: [
       "https://www.wur.nl/upload/77dd7d70-e5e5-4669-a1bc-5a94ea540be2_shutterstock_1305900268.jpg",
     ],
@@ -37,9 +37,7 @@ const slides = [
       "Food waste methane is 30× more harmful than CO₂",
     ],
     cta: "Take Action Now",
-    icon: (
-      <FiAlertTriangle className="text-blue-600 dark:text-blue-400" size={24} />
-    ),
+    icon: <FiAlertTriangle className="text-blue-500" size={24} />,
     images: ["https://i.postimg.cc/sfYw1Qjh/azg3-c7c7-220309.jpg"],
   },
   {
@@ -53,7 +51,7 @@ const slides = [
       "Visual expiry dashboard with alerts",
     ],
     cta: "Explore Dashboard",
-    icon: <FiEye className="text-blue-600 dark:text-blue-400" size={24} />,
+    icon: <FiEye className="text-blue-500" size={24} />,
     images: [
       "https://i.postimg.cc/nzthLw2B/arrangement-different-foods-organized-fridge.jpg",
     ],
@@ -63,12 +61,15 @@ const slides = [
 const Carousel = () => {
   const [current, setCurrent] = useState(0);
   const [dir, setDir] = useState(1);
+  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const interval = setInterval(() => slide(1), 5000);
+    const interval = setInterval(() => {
+      if (!isHovered) slide(1);
+    }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isHovered, current]);
 
   const slide = (d) => {
     setDir(d);
@@ -77,144 +78,221 @@ const Carousel = () => {
     );
   };
 
-  const slideVars = {
-    enter: (d) => ({ x: d > 0 ? 300 : -300, opacity: 0 }),
-    center: { x: 0, opacity: 1, transition: { duration: 0.6 } },
-    exit: (d) => ({
-      x: d < 0 ? 300 : -300,
+  // Unified animation for slide container
+  const containerVariants = {
+    enter: (d) => ({
+      x: d > 0 ? "50%" : "-50%",
       opacity: 0,
-      transition: { duration: 0.6 },
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 1,
+        ease: [0.33, 1, 0.68, 1],
+      },
+    },
+    exit: (d) => ({
+      x: d < 0 ? "50%" : "-50%",
+      opacity: 0,
+      transition: {
+        duration: 1,
+        ease: [0.33, 1, 0.68, 1],
+      },
     }),
   };
 
+  // Content animation that syncs with slide
   const contentVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: (i) => ({
+    visible: {
       y: 0,
       opacity: 1,
-      transition: { delay: i * 0.1 + 0.2, duration: 0.5 },
-    }),
+      transition: {
+        duration: 0.8,
+        ease: [0.33, 1, 0.68, 1],
+        delay: 0.3,
+      },
+    },
   };
 
   return (
-    <div className="relative w-full h-[70vh] bg-sky-50 dark:bg-gray-900 overflow-hidden">
-      {/* Arrows */}
+    <div
+      className="relative pt-16 w-full h-[50vh] md:h-[60vh] lg:h-[70vh] bg-sky-50 dark:bg-gray-900 overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Background elements */}
+      <motion.div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-100 dark:bg-blue-900/20 rounded-full filter blur-3xl opacity-30"
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 20, 0],
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-sky-100 dark:bg-sky-900/20 rounded-full filter blur-3xl opacity-30"
+          animate={{
+            scale: [1, 1.1, 1],
+            x: [0, -20, 0],
+            y: [0, 20, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
+      </motion.div>
+
+      {/* Navigation arrows */}
       <button
         onClick={() => slide(-1)}
-        className="hidden cursor-pointer sm:flex absolute left-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow hover:scale-105 transition z-10"
-        aria-label="Prev"
+        className="hidden sm:flex absolute left-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg hover:shadow-xl z-10 group"
+        aria-label="Previous slide"
       >
-        <FiChevronLeft size={24} className="text-black dark:text-white" />
+        <motion.div
+          whileHover={{ x: -4 }}
+          whileTap={{ scale: 0.92 }}
+          transition={{ type: "spring", stiffness: 300, damping: 10 }}
+        >
+          <FiChevronLeft
+            size={24}
+            className="text-gray-700 dark:text-gray-300 group-hover:text-blue-500 transition-colors duration-300"
+          />
+        </motion.div>
       </button>
       <button
         onClick={() => slide(1)}
-        className="hidden cursor-pointer sm:flex absolute right-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow hover:scale-105 transition z-10"
-        aria-label="Next"
+        className="hidden sm:flex absolute right-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg hover:shadow-xl z-10 group"
+        aria-label="Next slide"
       >
-        <FiChevronRight size={24} className="text-black dark:text-white" />
+        <motion.div
+          whileHover={{ x: 4 }}
+          whileTap={{ scale: 0.92 }}
+          transition={{ type: "spring", stiffness: 300, damping: 10 }}
+        >
+          <FiChevronRight
+            size={24}
+            className="text-gray-700 dark:text-gray-300 group-hover:text-blue-500 transition-colors duration-300"
+          />
+        </motion.div>
       </button>
 
-      {/* Slides */}
-      <AnimatePresence custom={dir} initial={false} mode="wait">
+      {/* Slides container */}
+      <AnimatePresence custom={dir} initial={false} mode="popLayout">
         <motion.div
           key={slides[current].id}
           custom={dir}
-          variants={slideVars}
+          variants={containerVariants}
           initial="enter"
           animate="center"
           exit="exit"
           className="absolute inset-0 flex items-center justify-center px-6"
         >
-          <div
-            className="
-              flex flex-col md:flex-row items-center 
-              justify-between max-w-7xl w-full md:h-full gap-6
-            "
-          >
-            {/* Text */}
+          <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl w-full h-full gap-6 md:gap-12">
+            {/* Text content */}
             <motion.div
-              className="flex-1 max-w-xl text-black dark:text-white"
+              className="flex-1 max-w-xl space-y-6"
               initial="hidden"
               animate="visible"
               variants={contentVariants}
-              custom={0}
             >
               <motion.h2
-                className="text-2xl md:text-3xl lg:text-5xl font-bold leading-tight mb-4"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-gray-900 dark:text-white"
                 variants={contentVariants}
-                custom={0}
               >
                 {slides[current].title}
+                <motion.span
+                  className="block h-1 w-20 bg-blue-500 mt-2"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                />
               </motion.h2>
+
               <motion.p
-                className="text-base md:text-lg lg:text-xl leading-relaxed mb-4"
+                className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed"
                 variants={contentVariants}
-                custom={1}
               >
                 {slides[current].subtitle}
               </motion.p>
-              <motion.ul
-                variants={{
-                  visible: { transition: { staggerChildren: 0.15 } },
-                }}
-                initial="hidden"
-                animate="visible"
-                className="mb-6 space-y-2"
-              >
-                {slides[current].list.map((it, i) => (
+
+              <motion.ul className="space-y-3">
+                {slides[current].list.map((item, i) => (
                   <motion.li
                     key={i}
-                    variants={contentVariants}
-                    custom={i + 2}
-                    className="flex items-center gap-3 text-base md:text-lg"
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 + i * 0.1, duration: 0.6 }}
+                    className="flex items-start gap-3 text-base md:text-lg"
                   >
-                    <span>{slides[current].icon}</span> <span>{it}</span>
+                    <motion.span
+                      className="shrink-0 mt-1"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      {slides[current].icon}
+                    </motion.span>
+                    <span className="text-gray-800 dark:text-gray-200">
+                      {item}
+                    </span>
                   </motion.li>
                 ))}
               </motion.ul>
-              <motion.button
-                onClick={() => navigate("/dashboard")}
-                variants={contentVariants}
-                initial="hidden"
-                animate="visible"
-                custom={5}
-                whileHover={{ scale: 1.05 }}
-                className="bg-blue-600 cursor-pointer hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition"
+
+              <motion.div
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
               >
-                {slides[current].cta}
-              </motion.button>
+                <motion.button
+                  onClick={() => navigate("/dashboard")}
+                  className="relative overflow-hidden px-6 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium text-lg shadow-md"
+                  whileHover={{
+                    y: -3,
+                    boxShadow: "0 10px 20px -5px rgba(59, 130, 246, 0.5)",
+                  }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  <span className="relative z-10">{slides[current].cta}</span>
+                </motion.button>
+              </motion.div>
             </motion.div>
 
             {/* Image */}
-            <AnimatePresence mode="wait">
+            <motion.div
+              className="hidden md:flex flex-1 h-full max-w-lg items-center justify-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
               <motion.div
-                key={slides[current].id}
-                className="hidden md:flex justify-center items-center flex-1 max-w-lg h-full"
-                initial={{ opacity: 0, x: 100, scale: 0.95 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: -100, scale: 0.95 }}
-                transition={{ duration: 0.6 }}
+                className="w-full h-[40vh] lg:h-[50vh] rounded-xl overflow-hidden shadow-xl relative"
+                whileHover={{ scale: 1.02 }}
               >
-                <motion.div
-                  className="w-full h-[40vh]  lg:h-[50vh] bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300"
-                  whileHover={{ scale: 1.03 }}
-                >
-                  <img
-                    src={slides[current].images[0]}
-                    alt="Slide Image"
-                    loading="lazy"
-                    className="w-full h-full object-cover blur-sm transition-all duration-500 ease-out"
-                    onLoad={(e) => e.currentTarget.classList.remove("blur-sm")}
-                  />
-                </motion.div>
+                <img
+                  src={slides[current].images[0]}
+                  alt="Slide visual"
+                  loading="lazy"
+                  className="w-full h-full object-cover brightness-90 hover:brightness-100 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 to-transparent" />
               </motion.div>
-            </AnimatePresence>
+            </motion.div>
           </div>
         </motion.div>
       </AnimatePresence>
 
-      {/* Dots */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
+      {/* Dots indicator */}
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
         {slides.map((_, i) => (
           <button
             key={i}
@@ -222,13 +300,20 @@ const Carousel = () => {
               setDir(i > current ? 1 : -1);
               setCurrent(i);
             }}
-            className={`w-3 h-3 cursor-pointer rounded-full transition-all ${
-              i === current
-                ? "bg-black dark:bg-white w-6"
-                : "bg-gray-400 dark:bg-gray-600 hover:bg-gray-600"
-            }`}
+            className="relative h-2 rounded-full overflow-hidden"
             aria-label={`Go to slide ${i + 1}`}
-          />
+          >
+            <div className="w-4 h-full bg-gray-300 dark:bg-gray-600 relative">
+              {i === current && (
+                <motion.div
+                  className="absolute inset-0 bg-blue-500 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 4, ease: "linear" }}
+                />
+              )}
+            </div>
+          </button>
         ))}
       </div>
     </div>

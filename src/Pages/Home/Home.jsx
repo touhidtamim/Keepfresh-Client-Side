@@ -10,8 +10,10 @@ import ConsultationBooking from "./ConsultationBooking";
 
 const Home = () => {
   return (
-    <div>
-      <Carousel />
+    <>
+      <div className="pt-5 md:pt-0">
+        <Carousel />
+      </div>
       <NearlyExpiryItems />
       <ExpiredItems />
       <BlogPreview />
@@ -19,7 +21,7 @@ const Home = () => {
       <ImpactHighlights />
       <ResourceCenter />
       <ConsultationBooking />
-    </div>
+    </>
   );
 };
 
