@@ -7,6 +7,8 @@ import Carousel from "../../Components/Slider/Carousel";
 import ImpactHighlights from "./ImpactHighlights";
 import ResourceCenter from "./ResourceCenter";
 import ConsultationBooking from "./ConsultationBooking";
+import WhyKeepFresh from "../../Components/WhyKeepFresh/WhykeepFresh";
+import FeatureTimeline from "../../Components/FeatureTimeLine/FeatureTimeLine";
 
 const Home = () => {
   return (
@@ -14,10 +16,12 @@ const Home = () => {
       <div className="pt-5 md:pt-0">
         <Carousel />
       </div>
+      <WhyKeepFresh />
+      <HowItWorks />
+      <FeatureTimeline />
       <NearlyExpiryItems />
       <ExpiredItems />
       <BlogPreview />
-      <HowItWorks />
       <ImpactHighlights />
       <ResourceCenter />
       <ConsultationBooking />
