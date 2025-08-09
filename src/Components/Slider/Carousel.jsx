@@ -20,7 +20,7 @@ const slides = [
       "Stay ahead with smart notifications",
       "Waste less, save more",
     ],
-    cta: "Start Now",
+    cta: "Get Started Today",
     icon: <FiCheck className="text-blue-600 dark:text-blue-400" size={24} />,
     images: [
       "https://www.wur.nl/upload/77dd7d70-e5e5-4669-a1bc-5a94ea540be2_shutterstock_1305900268.jpg",
@@ -32,11 +32,11 @@ const slides = [
     subtitle:
       "Good food rots silently, draining your budget and harming the planet every week.",
     list: [
-      "₹8,000/year lost per family",
-      "Forgotten food in the fridge",
-      "Methane from waste is 30x worse than CO₂",
+      "$3,000+ lost every year by the average family",
+      "Forgotten food hiding in the fridge",
+      "Food waste methane is 30× more harmful than CO₂",
     ],
-    cta: "Stop the Waste",
+    cta: "Take Action Now",
     icon: (
       <FiAlertTriangle className="text-blue-600 dark:text-blue-400" size={24} />
     ),
@@ -48,9 +48,9 @@ const slides = [
     subtitle:
       "KeepFresh gives you a real-time overview of your food, expiration dates, and personalized recipe suggestions.",
     list: [
-      "Live fridge monitoring",
+      "Live fridge inventory updates",
       "Recipe suggestions from leftovers",
-      "Visual expiry dashboard",
+      "Visual expiry dashboard with alerts",
     ],
     cta: "Explore Dashboard",
     icon: <FiEye className="text-blue-600 dark:text-blue-400" size={24} />,
