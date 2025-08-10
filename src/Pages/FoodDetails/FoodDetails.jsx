@@ -118,8 +118,20 @@ const FoodDetails = () => {
 
   if (loading)
     return (
-      <div className="text-center mt-10 text-xl text-gray-700 dark:text-gray-200">
-        Loading...
+      <div className="flex flex-col items-center justify-center min-h-[200px]">
+        <div className="relative">
+          {/* Outer ring */}
+          <div className="w-12 h-12 border-4 border-blue-200 dark:border-blue-800 rounded-full"></div>
+
+          {/* Spinner */}
+          <div className="absolute top-0 left-0 w-12 h-12 border-4 border-t-blue-500 dark:border-t-blue-400 border-transparent rounded-full animate-spin"></div>
+
+          {/* Inner dot */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full"></div>
+        </div>
+        <p className="mt-4 text-lg font-medium text-gray-700 dark:text-gray-300">
+          Loading...
+        </p>
       </div>
     );
 

@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import CountUp from "react-countup";
+import {
+  FiSearch,
+  FiFilter,
+  FiClock,
+  FiAlertTriangle,
+  FiBox,
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi";
 
 const ShowAllItems = () => {
   const [items, setItems] = useState([]);
@@ -11,56 +20,52 @@ const ShowAllItems = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [sortBy, setSortBy] = useState("newest");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6); // Default to mobile view
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  // Set items per page based on screen size
+  // Responsive items per page
   useEffect(() => {
     const updateItemsPerPage = () => {
       if (window.innerWidth >= 1280) {
-        // Desktop (xl)
-        setItemsPerPage(16); // 4x4 grid
+        setItemsPerPage(16);
       } else if (window.innerWidth >= 768) {
-        // Tablet (lg)
-        setItemsPerPage(9); // 3x3 grid
+        setItemsPerPage(9);
       } else {
-        // Mobile
-        setItemsPerPage(6); // 2x3 grid
+        setItemsPerPage(6);
       }
     };
-
-    // Set initial value
     updateItemsPerPage();
     window.addEventListener("resize", updateItemsPerPage);
     return () => window.removeEventListener("resize", updateItemsPerPage);
   }, []);
 
+  // Fetch data
   useEffect(() => {
     fetch("https://keep-fresh-server-side.vercel.app/items")
       .then((res) => res.json())
       .then((data) => {
         let sorted = [...data];
-        if (sortBy === "newest") {
+        if (sortBy === "newest")
           sorted.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
-        } else if (sortBy === "oldest") {
+        else if (sortBy === "oldest")
           sorted.sort((a, b) => new Date(a.addedAt) - new Date(b.addedAt));
-        } else if (sortBy === "expiry-asc") {
+        else if (sortBy === "expiry-asc")
           sorted.sort(
             (a, b) => new Date(a.expiryDate) - new Date(b.expiryDate)
           );
-        } else if (sortBy === "expiry-desc") {
+        else if (sortBy === "expiry-desc")
           sorted.sort(
             (a, b) => new Date(b.expiryDate) - new Date(a.expiryDate)
           );
-        }
         setItems(sorted);
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, [sortBy]);
 
+  // Helpers
   const isExpired = (expiryDate) =>
     expiryDate && new Date(expiryDate) < new Date();
-
   const isNearlyExpired = (expiryDate) => {
     if (!expiryDate) return false;
     const now = new Date();
@@ -68,9 +73,9 @@ const ShowAllItems = () => {
     const diff = (expiry - now) / (1000 * 60 * 60 * 24);
     return diff >= 0 && diff <= 5;
   };
-
   const handleSearch = () => setCurrentPage(1);
 
+  // Filtering
   const filteredItems = items.filter((item) => {
     const matchesSearch =
       item.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -89,27 +94,21 @@ const ShowAllItems = () => {
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
-  // Pagination calculation
+  // Pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-
   const goToPage = (page) => setCurrentPage(page);
   const nextPage = () =>
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
+  // Animations
   const container = {
     hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
+    show: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
-
   const itemVariants = {
     hidden: { opacity: 0, y: 40 },
     show: {
@@ -119,344 +118,355 @@ const ShowAllItems = () => {
     },
   };
 
+  // Categories for filter
+  const categories = [
+    "Dairy",
+    "Meat",
+    "Vegetable",
+    "Fruits",
+    "Beverages",
+    "Snacks",
+    "Others",
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4 sm:px-6 lg:px-8">
-      {/* Search and Filter Section */}
-      <div className="max-w-7xl mx-auto mb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Search Input */}
-          <div className="flex">
-            <input
-              type="text"
-              placeholder="Search items..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="flex-1 px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-l-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-            />
-            <button
-              onClick={handleSearch}
-              className="bg-sky-600 dark:bg-sky-700 text-white px-4 rounded-r-md hover:bg-sky-700 dark:hover:bg-sky-800 transition"
-            >
-              Search
-            </button>
-          </div>
-
-          {/* Category Filter */}
-          <select
-            className="px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-            value={categoryFilter}
-            onChange={(e) => {
-              setCategoryFilter(e.target.value);
-              setCurrentPage(1);
-            }}
-          >
-            <option value="">All Categories</option>
-            <option value="Dairy">Dairy</option>
-            <option value="Meat">Meat</option>
-            <option value="Vegetable">Vegetable</option>
-            <option value="Fruits">Fruits</option>
-            <option value="Beverages">Beverages</option>
-            <option value="Snacks">Snacks</option>
-            <option value="Others">Others</option>
-          </select>
-
-          {/* Status Filter */}
-          <select
-            className="px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-            value={statusFilter}
-            onChange={(e) => {
-              setStatusFilter(e.target.value);
-              setCurrentPage(1);
-            }}
-          >
-            <option value="">All Status</option>
-            <option value="fresh">Fresh</option>
-            <option value="nearly-expired">Nearly Expired</option>
-            <option value="expired">Expired</option>
-          </select>
-
-          {/* Sort By */}
-          <select
-            className="px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-md focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-          >
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="expiry-asc">Expiry (Soonest)</option>
-            <option value="expiry-desc">Expiry (Latest)</option>
-          </select>
-        </div>
-      </div>
-
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6">
       {/* Stats Section */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="max-w-7xl mx-auto mb-10 grid grid-cols-1 sm:grid-cols-3 gap-6"
+        className="max-w-7xl mx-auto mb-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
       >
         {[
           {
             label: "Total Items",
             count: filteredItems.length,
-            color: "bg-blue-500 dark:bg-blue-600",
-            iconPath:
-              "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
+            color: "bg-blue-100 dark:bg-blue-900",
+            textColor: "text-blue-600 dark:text-blue-300",
+            icon: <FiBox className="h-6 w-6" />,
           },
           {
             label: "Expired Items",
             count: filteredItems.filter((i) => isExpired(i.expiryDate)).length,
-            color: "bg-red-500 dark:bg-red-600",
-            iconPath: "M6 18L18 6M6 6l12 12",
+            color: "bg-red-100 dark:bg-red-900",
+            textColor: "text-red-600 dark:text-red-300",
+            icon: <FiAlertTriangle className="h-6 w-6" />,
           },
           {
             label: "Nearly Expiring",
             count: filteredItems.filter((i) => isNearlyExpired(i.expiryDate))
               .length,
-            color: "bg-yellow-500 dark:bg-yellow-600",
-            iconPath: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+            color: "bg-yellow-100 dark:bg-yellow-900",
+            textColor: "text-yellow-600 dark:text-yellow-300",
+            icon: <FiClock className="h-6 w-6" />,
           },
         ].map((stat, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-gray-800 p-6 shadow rounded-lg flex items-center"
+            className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-start"
           >
-            <div className={`${stat.color} p-3 rounded-md text-white`}>
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d={stat.iconPath}
-                />
-              </svg>
+            <div
+              className={`${stat.color} ${stat.textColor} p-3 rounded-lg flex-shrink-0`}
+            >
+              {stat.icon}
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 {stat.label}
               </p>
               <p className="text-2xl font-semibold text-gray-900 dark:text-white">
-                <CountUp end={stat.count} duration={1} />
+                <CountUp end={stat.count} duration={1.5} />
               </p>
             </div>
           </div>
         ))}
       </motion.div>
 
-      {/* Cards Grid */}
-      {loading ? (
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin h-12 w-12 rounded-full border-t-4 border-blue-500 border-solid" />
-        </div>
-      ) : filteredItems.length === 0 ? (
-        <div className="text-center text-gray-500 dark:text-gray-400 text-xl mt-20">
-          No items found matching your criteria.
-        </div>
-      ) : (
-        <>
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-          >
-            {currentItems.map((item) => (
-              <motion.div
-                key={item._id}
-                variants={itemVariants}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-100 dark:border-gray-700"
-              >
-                <div className="relative">
-                  <img
-                    src={
-                      item.image ||
-                      "https://i.postimg.cc/3xQgzDmK/800px-Image-not-available.png"
-                    }
-                    alt={item.title || "Food Item"}
-                    className="w-full h-48 object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src =
-                        "https://i.postimg.cc/3xQgzDmK/800px-Image-not-available.png";
-                    }}
-                  />
-                  {isExpired(item.expiryDate) ? (
-                    <span className="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                      Expired
-                    </span>
-                  ) : isNearlyExpired(item.expiryDate) ? (
-                    <span className="absolute top-3 right-3 bg-yellow-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                      Expiring Soon
-                    </span>
-                  ) : null}
-                </div>
-                <div className="p-4 space-y-2">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white line-clamp-2">
-                    {item.title || "Unnamed Item"}
-                  </h3>
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full">
-                      {item.category || "Uncategorized"}
-                    </span>
-                    <span className="text-xs text-gray-700 dark:text-gray-300">
-                      Qty: {item.quantity ?? "N/A"}
-                    </span>
-                  </div>
-                  <p
-                    className={`text-xs ${
-                      isExpired(item.expiryDate)
-                        ? "text-red-600 dark:text-red-400"
-                        : isNearlyExpired(item.expiryDate)
-                        ? "text-yellow-600 dark:text-yellow-400"
-                        : "text-gray-700 dark:text-gray-300"
-                    }`}
-                  >
-                    Expiry:{" "}
-                    {item.expiryDate
-                      ? new Date(item.expiryDate).toLocaleDateString()
-                      : "Unknown"}
-                  </p>
-                  <Link to={`/items/${item._id}`}>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-full mt-2 cursor-pointer bg-gradient-to-r from-sky-500 to-sky-800 dark:from-sky-600 dark:to-sky-900 text-white py-2 rounded-md text-sm"
-                    >
-                      See Details
-                    </motion.button>
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mt-12 flex flex-col sm:flex-row justify-center items-center gap-4"
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
+        {/* Sidebar - Filters */}
+        <div
+          className={`w-full lg:w-64 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-5 h-screen lg:sticky lg:top-4 transition-all duration-300 ${
+            sidebarCollapsed ? "lg:w-20 overflow-hidden" : ""
+          }`}
+        >
+          <div className="flex justify-between items-center mb-4">
+            <h2
+              className={`text-lg font-semibold text-gray-900 dark:text-white flex items-center ${
+                sidebarCollapsed ? "hidden" : ""
+              }`}
             >
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={prevPage}
-                  disabled={currentPage === 1}
-                  className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-white disabled:opacity-50 transition-colors flex items-center text-sm"
-                >
-                  <svg
-                    className="w-4 h-4 mr-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                  Previous
-                </button>
+              <FiFilter className="mr-2" /> Filters
+            </h2>
+            <button
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              className="hidden lg:flex items-center justify-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              {sidebarCollapsed ? (
+                <FiChevronRight className="h-5 w-5" />
+              ) : (
+                <FiChevronLeft className="h-5 w-5" />
+              )}
+            </button>
+          </div>
 
-                <div className="flex items-center gap-1">
-                  {/* Always show first page */}
-                  {currentPage > 2 && totalPages > 3 && (
-                    <button
-                      onClick={() => goToPage(1)}
-                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                        currentPage === 1
-                          ? "bg-sky-600 text-white shadow-md"
-                          : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
-                      } transition-colors font-medium text-xs`}
-                    >
-                      1
-                    </button>
-                  )}
-
-                  {/* Show ellipsis if current page is far from start */}
-                  {currentPage > 3 && (
-                    <span className="px-1 text-gray-500 dark:text-gray-400">
-                      ...
-                    </span>
-                  )}
-
-                  {/* Show pages around current page */}
-                  {[currentPage - 1, currentPage, currentPage + 1]
-                    .filter((page) => page > 0 && page <= totalPages)
-                    .map((page) => (
-                      <button
-                        key={page}
-                        onClick={() => goToPage(page)}
-                        className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                          currentPage === page
-                            ? "bg-sky-600 text-white shadow-md"
-                            : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
-                        } transition-colors font-medium text-xs`}
-                      >
-                        {page}
-                      </button>
-                    ))}
-
-                  {/* Show ellipsis if current page is far from end */}
-                  {currentPage < totalPages - 2 && (
-                    <span className="px-1 text-gray-500 dark:text-gray-400">
-                      ...
-                    </span>
-                  )}
-
-                  {/* Always show last page if there's more than one page */}
-                  {totalPages > 1 && currentPage < totalPages - 1 && (
-                    <button
-                      onClick={() => goToPage(totalPages)}
-                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                        currentPage === totalPages
-                          ? "bg-sky-600 text-white shadow-md"
-                          : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
-                      } transition-colors font-medium text-xs`}
-                    >
-                      {totalPages}
-                    </button>
-                  )}
-                </div>
-
-                <button
-                  onClick={nextPage}
-                  disabled={currentPage === totalPages}
-                  className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-white disabled:opacity-50 transition-colors flex items-center text-sm"
-                >
-                  Next
-                  <svg
-                    className="w-4 h-4 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
+          {/* Search */}
+          <div className={`mb-5 ${sidebarCollapsed ? "hidden" : ""}`}>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Search
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <FiSearch className="h-5 w-5 text-gray-400" />
               </div>
+              <input
+                type="text"
+                placeholder="Search items..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
 
-              {/* Page info */}
-              <div className="text-xs text-gray-500 dark:text-gray-400">
-                Page {currentPage} of {totalPages} • {filteredItems.length}{" "}
-                items
-              </div>
-            </motion.div>
+          {/* Category Filter */}
+          <div className={`mb-5 ${sidebarCollapsed ? "hidden" : ""}`}>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Category
+            </label>
+            <select
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)}
+              className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            >
+              <option value="">All Categories</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Status Filter */}
+          <div className={`mb-5 ${sidebarCollapsed ? "hidden" : ""}`}>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Status
+            </label>
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            >
+              <option value="">All Statuses</option>
+              <option value="fresh">Fresh</option>
+              <option value="nearly-expired">Nearly Expired</option>
+              <option value="expired">Expired</option>
+            </select>
+          </div>
+
+          {/* Sort By */}
+          <div className={`${sidebarCollapsed ? "hidden" : ""}`}>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Sort By
+            </label>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            >
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="expiry-asc">Expiry (Soonest)</option>
+              <option value="expiry-desc">Expiry (Latest)</option>
+            </select>
+          </div>
+
+          {/* Collapsed View */}
+          {sidebarCollapsed && (
+            <div className="flex flex-col items-center space-y-4">
+              <button
+                onClick={() => setSidebarCollapsed(false)}
+                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <FiFilter className="h-5 w-5" />
+              </button>
+              <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                <FiSearch className="h-5 w-5" />
+              </button>
+            </div>
           )}
-        </>
-      )}
+        </div>
+
+        {/* Items Grid */}
+        <div className="flex-1">
+          {loading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin h-12 w-12 border-t-4 border-blue-500 rounded-full"></div>
+            </div>
+          ) : filteredItems.length === 0 ? (
+            <div className="text-center py-20">
+              <div className="mx-auto h-24 w-24 text-gray-400 dark:text-gray-500 mb-4">
+                <FiBox className="w-full h-full" />
+              </div>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                No items found
+              </h3>
+              <p className="mt-1 text-gray-500 dark:text-gray-400">
+                Try adjusting your search or filter criteria
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* Items Count */}
+              <div className="mb-4 flex justify-between items-center">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Showing{" "}
+                  <span className="font-medium">
+                    {indexOfFirstItem + 1}-
+                    {Math.min(indexOfLastItem, filteredItems.length)}
+                  </span>{" "}
+                  of <span className="font-medium">{filteredItems.length}</span>{" "}
+                  items
+                </p>
+              </div>
+
+              {/* Items Grid */}
+              <motion.div
+                variants={container}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5"
+              >
+                {currentItems.map((item) => (
+                  <motion.div
+                    key={item._id}
+                    variants={itemVariants}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700 transition-all duration-200 hover:shadow-md"
+                  >
+                    <div className="relative h-48">
+                      <img
+                        src={
+                          item.image ||
+                          "https://i.postimg.cc/3xQgzDmK/800px-Image-not-available.png"
+                        }
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="absolute top-3 right-3 flex flex-col space-y-2">
+                        {isExpired(item.expiryDate) && (
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200">
+                            Expired
+                          </span>
+                        )}
+                        {isNearlyExpired(item.expiryDate) &&
+                          !isExpired(item.expiryDate) && (
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">
+                              Expiring Soon
+                            </span>
+                          )}
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                            {item.title}
+                          </h3>
+                          <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                            {item.category}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <p
+                          className={`text-sm ${
+                            isExpired(item.expiryDate)
+                              ? "text-red-600 dark:text-red-400"
+                              : isNearlyExpired(item.expiryDate)
+                              ? "text-yellow-600 dark:text-yellow-400"
+                              : "text-gray-500 dark:text-gray-400"
+                          }`}
+                        >
+                          Expiry:{" "}
+                          {item.expiryDate
+                            ? new Date(item.expiryDate).toLocaleDateString()
+                            : "Unknown"}
+                        </p>
+                      </div>
+                      <Link to={`/items/${item._id}`}>
+                        <button className="w-full mt-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-2 rounded-lg text-sm font-medium transition-all duration-200">
+                          View Details
+                        </button>
+                      </Link>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="mt-8 flex justify-center items-center gap-2">
+                  <button
+                    onClick={prevPage}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Previous
+                  </button>
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                      let pageNum;
+                      if (totalPages <= 5) {
+                        pageNum = i + 1;
+                      } else if (currentPage <= 3) {
+                        pageNum = i + 1;
+                      } else if (currentPage >= totalPages - 2) {
+                        pageNum = totalPages - 4 + i;
+                      } else {
+                        pageNum = currentPage - 2 + i;
+                      }
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => goToPage(pageNum)}
+                          className={`w-10 h-10 flex items-center justify-center rounded-lg text-sm font-medium ${
+                            currentPage === pageNum
+                              ? "bg-blue-600 text-white"
+                              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          } transition-colors`}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    })}
+                    {totalPages > 5 && currentPage < totalPages - 2 && (
+                      <span className="px-2 text-gray-500">...</span>
+                    )}
+                    {totalPages > 5 && currentPage < totalPages - 2 && (
+                      <button
+                        onClick={() => goToPage(totalPages)}
+                        className="w-10 h-10 flex items-center justify-center rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      >
+                        {totalPages}
+                      </button>
+                    )}
+                  </div>
+                  <button
+                    onClick={nextPage}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
