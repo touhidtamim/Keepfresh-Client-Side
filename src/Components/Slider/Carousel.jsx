@@ -255,7 +255,7 @@ const Carousel = () => {
               >
                 <motion.button
                   onClick={() => navigate("/dashboard")}
-                  className="relative overflow-hidden px-6 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium text-lg shadow-md"
+                  className="relative cursor-pointer overflow-hidden px-6 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium text-lg shadow-md"
                   whileHover={{
                     y: -3,
                     boxShadow: "0 10px 20px -5px rgba(59, 130, 246, 0.5)",
