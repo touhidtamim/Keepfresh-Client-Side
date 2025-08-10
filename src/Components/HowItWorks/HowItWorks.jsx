@@ -17,32 +17,32 @@ const steps = [
     title: "1. Smart Scanning",
     description:
       "Simply scan your grocery receipts or use our AI-powered image recognition to catalog items entering your fridge.",
-    icon: <FiPackage className="text-blue-500" size={24} />,
-    color: "bg-blue-100 dark:bg-blue-900/30",
+    icon: <FiPackage className="text-sky-500" size={24} />,
+    color: "bg-sky-100 dark:bg-sky-900/30",
   },
   {
     id: 2,
     title: "2. Real-Time Tracking",
     description:
       "Our system automatically tracks expiration dates and quantities as you use items through integrated smart scales or manual updates.",
-    icon: <FiDatabase className="text-emerald-500" size={24} />,
-    color: "bg-emerald-100 dark:bg-emerald-900/30",
+    icon: <FiDatabase className="text-sky-500" size={24} />,
+    color: "bg-sky-100 dark:bg-sky-900/30",
   },
   {
     id: 3,
     title: "3. Intelligent Alerts",
     description:
       "Get notifications when items are nearing expiration or when you're running low on staples.",
-    icon: <FiBell className="text-amber-500" size={24} />,
-    color: "bg-amber-100 dark:bg-amber-900/30",
+    icon: <FiBell className="text-sky-500" size={24} />,
+    color: "bg-sky-100 dark:bg-sky-900/30",
   },
   {
     id: 4,
     title: "4. Personalized Insights",
     description:
       "Receive weekly reports with consumption patterns, savings achieved, and personalized shopping suggestions.",
-    icon: <FiBarChart2 className="text-rose-500" size={24} />,
-    color: "bg-rose-100 dark:bg-rose-900/30",
+    icon: <FiBarChart2 className="text-sky-500" size={24} />,
+    color: "bg-sky-100 dark:bg-sky-900/30",
   },
 ];
 
@@ -74,7 +74,7 @@ const HowItWorks = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
             How{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-sky-600">
               KeepFresh
             </span>{" "}
             Works
@@ -145,7 +145,7 @@ const HowItWorks = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                 <h3 className="text-xl font-bold mb-2">See It In Action</h3>
-                <p className="text-blue-100 max-w-md">
+                <p className="text-sky-100 max-w-md">
                   Our mobile app brings all these features to your fingertips
                   with an intuitive interface.
                 </p>
@@ -185,7 +185,7 @@ const HowItWorks = () => {
                   className="flex items-start space-x-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-100 dark:border-gray-700/50"
                 >
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-500 dark:text-blue-300">
+                    <div className="w-10 h-10 rounded-lg bg-sky-50 dark:bg-sky-900/20 flex items-center justify-center text-sky-500 dark:text-sky-300">
                       {feature.icon}
                     </div>
                   </div>
@@ -210,7 +210,7 @@ const HowItWorks = () => {
             >
               <Link
                 to="/dashboard"
-                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
+                className="px-6 py-3 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
               >
                 Get Started in 2 Minutes
               </Link>
