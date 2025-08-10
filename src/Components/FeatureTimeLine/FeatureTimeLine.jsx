@@ -221,7 +221,7 @@ const FeatureTimeline = () => {
             to="/dashboard"
             className="px-8 py-3 bg-gradient-to-r from-sky-500 to-sky-600 dark:from-sky-600 dark:to-sky-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
           >
-            Get Started
+            Discover More
           </Link>
         </div>
       </div>

@@ -189,7 +189,7 @@ const ResourcesAndImpact = () => {
               to="dashboard"
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-lg font-medium shadow-sm hover:shadow-md transition-all"
             >
-              Get Started
+              Join Our Community
             </Link>
           </motion.div>
         </div>
