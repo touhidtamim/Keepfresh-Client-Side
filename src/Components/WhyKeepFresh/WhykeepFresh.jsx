@@ -30,7 +30,7 @@ const benefitsData = [
       "Our smart tracking system organizes your fridge automatically, saving you 3+ hours weekly on meal planning and inventory checks.",
     stats: "3.2 hours average weekly time savings",
     icon: "clock",
-    color: "from-blue-400 to-indigo-500",
+    color: "from-sky-400 to-sky-600",
     bg: "bg-white dark:bg-gray-800",
   },
   {
@@ -40,7 +40,7 @@ const benefitsData = [
       "Users reduce grocery waste by 40% on average, translating to $1,200+ annual savings for most families.",
     stats: "40% average waste reduction",
     icon: "dollar",
-    color: "from-emerald-400 to-teal-500",
+    color: "from-sky-400 to-sky-500",
     bg: "bg-white dark:bg-gray-800",
   },
   {
@@ -50,7 +50,7 @@ const benefitsData = [
       "Personalized recipe suggestions help transform leftovers into nutritious meals, reducing takeout dependency.",
     stats: "72% users report healthier eating habits",
     icon: "food",
-    color: "from-amber-400 to-orange-500",
+    color: "from-sky-300 to-sky-500",
     bg: "bg-white dark:bg-gray-800",
   },
   {
@@ -60,7 +60,7 @@ const benefitsData = [
       "Visual consumption patterns help optimize shopping habits and meal planning.",
     stats: "60% more efficient grocery shopping",
     icon: "chart",
-    color: "from-rose-400 to-pink-500",
+    color: "from-sky-500 to-sky-700",
     bg: "bg-white dark:bg-gray-800",
   },
 ];
@@ -96,7 +96,7 @@ const WhyKeepFresh = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
             Why Choose{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-sky-600">
               KeepFresh
             </span>
           </h2>
@@ -160,14 +160,14 @@ const WhyKeepFresh = () => {
               </div>
 
               {/* Subtle hover border effect */}
-              <div className="absolute inset-0 rounded-xl pointer-events-none border border-transparent group-hover:border-indigo-200/50 dark:group-hover:border-indigo-400/20 transition-all duration-300" />
+              <div className="absolute inset-0 rounded-xl pointer-events-none border border-transparent group-hover:border-sky-200/50 dark:group-hover:border-sky-400/20 transition-all duration-300" />
             </motion.div>
           ))}
         </div>
 
         {/* Enhanced Stats section */}
         <motion.div
-          className="mt-20 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-8 text-white shadow-xl overflow-hidden relative"
+          className="mt-20 bg-gradient-to-br from-sky-600 to-sky-800 rounded-2xl p-8 text-white shadow-xl overflow-hidden relative"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -182,7 +182,7 @@ const WhyKeepFresh = () => {
 
           <div className="relative z-10">
             <div className="text-center mb-8">
-              <h3 className="text-xl font-semibold text-blue-100 mb-2">
+              <h3 className="text-xl font-semibold text-sky-100 mb-2">
                 Proven Results
               </h3>
               <h4 className="text-2xl md:text-3xl font-bold">
@@ -210,7 +210,7 @@ const WhyKeepFresh = () => {
                   <div className="text-3xl md:text-4xl font-bold mb-2 drop-shadow-md">
                     {stat.value}
                   </div>
-                  <div className="text-blue-100/90 text-sm font-medium tracking-wide">
+                  <div className="text-sky-100/90 text-sm font-medium tracking-wide">
                     {stat.label}
                   </div>
                   {stat.value === "$1.2k" && (
