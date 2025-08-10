@@ -4,11 +4,10 @@ import HowItWorks from "./../../Components/HowItWorks/HowItWorks";
 import ExpiredItems from "./ExpiredItems";
 import NearlyExpiryItems from "./NearlyExpiryItems";
 import Carousel from "../../Components/Slider/Carousel";
-import ImpactHighlights from "./ImpactHighlights";
-import ResourceCenter from "./ResourceCenter";
 import ConsultationBooking from "./ConsultationBooking";
 import WhyKeepFresh from "../../Components/WhyKeepFresh/WhykeepFresh";
 import FeatureTimeline from "../../Components/FeatureTimeLine/FeatureTimeLine";
+import ResourcesAndImpact from "../../Components/ResourcesAndImpact/ResourcesAndImpact";
 
 const Home = () => {
   return (
@@ -19,11 +18,10 @@ const Home = () => {
       <WhyKeepFresh />
       <HowItWorks />
       <FeatureTimeline />
-      <NearlyExpiryItems />
-      <ExpiredItems />
+      <ResourcesAndImpact />
+      {/* <NearlyExpiryItems />
+      <ExpiredItems /> */}
       <BlogPreview />
-      <ImpactHighlights />
-      <ResourceCenter />
       <ConsultationBooking />
     </>
   );

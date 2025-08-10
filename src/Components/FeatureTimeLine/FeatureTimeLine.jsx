@@ -70,7 +70,7 @@ const FeatureTimeline = () => {
   }, []);
 
   return (
-    <section className="w-full bg-gray-50 border-y dark:border-gray-400/20 dark:bg-gray-900 py-10 md:py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-gray-50 border-y border-gray-700/10 dark:border-gray-400/20 dark:bg-gray-900 py-10 md:py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
