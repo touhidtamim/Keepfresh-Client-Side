@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { FiArrowLeft } from "react-icons/fi";
 
 import FoodImageExpiry from "./FoodImageExpiry";
 import FoodTitleDescription from "./FoodTitleDescription";
@@ -12,6 +13,7 @@ import FoodDetailsIntro from "./FoodDetailsIntro";
 
 const FoodDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const userEmail = user?.email || "";
 
@@ -73,7 +75,6 @@ const FoodDetails = () => {
   const isOwner = userEmail === item?.addedBy;
   const isExpired = countdown.expired;
 
-  // Add note
   const handleNoteAddOrUpdate = async (noteText) => {
     const res = await fetch(
       `https://keep-fresh-server-side.vercel.app/items/${id}/note`,
@@ -96,7 +97,6 @@ const FoodDetails = () => {
     }));
   };
 
-  // Delete note
   const handleNoteDelete = async () => {
     const res = await fetch(
       `https://keep-fresh-server-side.vercel.app/items/${id}/note`,
@@ -118,19 +118,15 @@ const FoodDetails = () => {
 
   if (loading)
     return (
-      <div className="flex flex-col items-center justify-center min-h-[200px]">
-        <div className="relative">
-          {/* Outer ring */}
-          <div className="w-12 h-12 border-4 border-blue-200 dark:border-blue-800 rounded-full"></div>
-
-          {/* Spinner */}
-          <div className="absolute top-0 left-0 w-12 h-12 border-4 border-t-blue-500 dark:border-t-blue-400 border-transparent rounded-full animate-spin"></div>
-
-          {/* Inner dot */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full"></div>
+      <div className="flex flex-col items-center justify-center min-h-[50vh]">
+        <div className="relative flex items-center justify-center">
+          {/* Enhanced spinner with gradient */}
+          <div className="w-16 h-16 rounded-full border-4 border-gray-200 dark:border-gray-700"></div>
+          <div className="absolute w-16 h-16 rounded-full border-4 border-transparent border-t-blue-500 border-r-blue-500 animate-spin"></div>
+          <div className="absolute w-10 h-10 rounded-full border-4 border-transparent border-b-blue-400 border-l-blue-400 animate-spin animation-delay-200"></div>
         </div>
-        <p className="mt-4 text-lg font-medium text-gray-700 dark:text-gray-300">
-          Loading...
+        <p className="mt-6 text-lg font-medium text-gray-700 dark:text-gray-300">
+          Loading food details...
         </p>
       </div>
     );
@@ -158,6 +154,15 @@ const FoodDetails = () => {
         transition={{ duration: 0.4 }}
         className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md mt-10 space-y-8"
       >
+        {/* Simple Go Back button above the image */}
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+        >
+          <FiArrowLeft className="w-4 h-4" />
+          Go Back
+        </button>
+
         <FoodImageExpiry
           foodImage={item.image}
           foodTitle={item.title}

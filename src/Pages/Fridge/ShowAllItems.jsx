@@ -186,7 +186,7 @@ const ShowAllItems = () => {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
         {/* Sidebar - Filters */}
         <div
-          className={`w-full lg:w-64 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-5 h-screen lg:sticky lg:top-4 transition-all duration-300 ${
+          className={`w-full lg:w-64 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-5 h-fit lg:h-screen lg:sticky lg:top-4 transition-all duration-300 ${
             sidebarCollapsed ? "lg:w-20 overflow-hidden" : ""
           }`}
         >
