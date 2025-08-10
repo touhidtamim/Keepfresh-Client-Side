@@ -16,8 +16,8 @@ const features = [
     description:
       "Get alerts before your food expires so you never waste anything.",
     icon: <FiCalendar />,
-    color: "from-blue-500 to-indigo-600",
-    darkColor: "from-blue-600 to-indigo-700",
+    color: "from-sky-500 to-sky-600",
+    darkColor: "from-sky-600 to-sky-700",
   },
   {
     id: 2,
@@ -25,8 +25,8 @@ const features = [
     description:
       "Items are tracked automatically via receipt scanning or photos.",
     icon: <FiShoppingBag />,
-    color: "from-emerald-500 to-teal-600",
-    darkColor: "from-emerald-600 to-teal-700",
+    color: "from-sky-500 to-sky-600",
+    darkColor: "from-sky-600 to-sky-700",
   },
   {
     id: 3,
@@ -34,24 +34,24 @@ const features = [
     description:
       "Get meal ideas based on what's about to expire in your fridge.",
     icon: <FiCoffee />,
-    color: "from-amber-500 to-orange-600",
-    darkColor: "from-amber-600 to-orange-700",
+    color: "from-sky-500 to-sky-600",
+    darkColor: "from-sky-600 to-sky-700",
   },
   {
     id: 4,
     title: "Consumption Analytics",
     description: "See your food usage patterns and savings over time.",
     icon: <FiBarChart2 />,
-    color: "from-rose-500 to-pink-600",
-    darkColor: "from-rose-600 to-pink-700",
+    color: "from-sky-500 to-sky-600",
+    darkColor: "from-sky-600 to-sky-700",
   },
   {
     id: 5,
     title: "Smart Shopping Lists",
     description: "AI-generated lists optimize your grocery trips.",
     icon: <FiDollarSign />,
-    color: "from-purple-500 to-violet-600",
-    darkColor: "from-purple-600 to-violet-700",
+    color: "from-sky-500 to-sky-600",
+    darkColor: "from-sky-600 to-sky-700",
   },
 ];
 
@@ -70,13 +70,13 @@ const FeatureTimeline = () => {
   }, []);
 
   return (
-    <section className="w-full bg-gray-50 dark:bg-gray-900 py-10 md:py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
+    <section className="w-full bg-gray-50 border-y dark:border-gray-400/20 dark:bg-gray-900 py-10 md:py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">
             Advanced{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-sky-600 dark:from-sky-400 dark:to-sky-500">
               Features
             </span>
           </h2>
@@ -219,7 +219,7 @@ const FeatureTimeline = () => {
         <div className="mt-16 text-center">
           <Link
             to="/dashboard"
-            className="px-8 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
+            className="px-8 py-3 bg-gradient-to-r from-sky-500 to-sky-600 dark:from-sky-600 dark:to-sky-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
           >
             Get Started
           </Link>
