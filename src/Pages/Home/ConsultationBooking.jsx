@@ -180,7 +180,7 @@ const ConsultationBooking = () => {
                   <div className="flex items-center gap-4">
                     <button
                       onClick={() => handleBooking(specialist.name)}
-                      className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
+                      className="inline-flex cursor-pointer items-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
                     >
                       <FiCalendar />
                       Book Session
@@ -293,7 +293,7 @@ const ConsultationBooking = () => {
           </p>
           <button
             onClick={() => handleBooking("a specialist")}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white px-8 py-4 rounded-lg font-bold shadow-lg hover:shadow-xl transition-all text-lg"
+            className="inline-flex cursor-pointer items-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white px-8 py-4 rounded-lg font-bold shadow-lg hover:shadow-xl transition-all text-lg"
           >
             <FiCalendar className="text-xl" />
             Book Your Consultation

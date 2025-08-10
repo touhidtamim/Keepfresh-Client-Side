@@ -91,7 +91,7 @@ const Navbar = () => {
       className={`transition-all duration-300 py-1 border-b ${
         isSticky
           ? "fixed top-0 left-0 w-full bg-sky-50 dark:bg-gray-800 shadow-sm z-50 border-gray-200 dark:border-gray-700"
-          : "relative bg-sky-50 dark:bg-gray-900 border-transparent dark:border-gray-700"
+          : "relative bg-white dark:bg-gray-900 border-transparent dark:border-gray-700"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -112,7 +112,7 @@ const Navbar = () => {
             <Link to="/" className="ml-2 lg:ml-0">
               <div className="flex-shrink-0 flex items-center">
                 <img
-                  className="h-15 lg:h-18 w-auto pb-3 py-1"
+                  className="h-15 lg:h-16 w-auto pb-2 py-2"
                   src="https://i.postimg.cc/d3YdpZK1/logo-transparent.png"
                   alt="Logo"
                 />
@@ -121,7 +121,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-1">
+          <div className="hidden lg:flex lg:items-center lg:space-x-4">
             {(isLoggedIn ? loggedInLinks : loggedOutLinks).map((link) => (
               <Link
                 key={link.name}
@@ -190,7 +190,7 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="btn bg-sky-700 lg:bg-white dark:lg:bg-gray-700 hover:border-gray-800 px-3 py-2 rounded-md text-md hover:text-gray-900 dark:text-white dark:hover:text-white transition duration-300"
+                  className="btn bg-sky-700 lg:bg-white dark:lg:bg-gray-700 hover:border-gray-800 px-3 py-2 rounded-md text-md hover:text-gray-900 text-white lg:text-black  dark:text-white dark:hover:text-white transition duration-300"
                 >
                   Login
                 </Link>
