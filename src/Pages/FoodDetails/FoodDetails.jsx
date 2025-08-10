@@ -154,7 +154,7 @@ const FoodDetails = () => {
         transition={{ duration: 0.4 }}
         className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md mt-10 space-y-8"
       >
-        {/* Simple Go Back button above the image */}
+        {/* Go Back button */}
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
